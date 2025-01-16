@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TwilightEye
+  m_Controller: {fileID: 9100000, guid: 00f2e3d867fb05f4d957125c82f94412, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b69baa5e1c83d354bbafbba00e5c9a18, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 032382550c0d90d43b2164d043866924, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c634a69b8f6d146459ed44f43f3268b6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1f2cb86ef48d0d642b827a3194f0c03f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0ffd3f2a669eabd46818c241e66f9386, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 07e17ed13f4c07e4dad0710ad845f18e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8654a2fd8072ae044b2edc45d7c4d281, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0b4c7e9e99a50bf4690eaa4dba7fe615, type: 2}

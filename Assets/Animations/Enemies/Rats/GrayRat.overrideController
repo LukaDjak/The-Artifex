@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GrayRat
+  m_Controller: {fileID: 9100000, guid: 703120fa92ded064bb771621fcb0456f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 67f1df9f86018ec4caa8dc65431102f0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d7fa737b6aea93e4bb0d8695a76e3a42, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 93d57d53001180542859cd6f0ed5984d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ef94e1f061e466c47a676f10ac23462f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6ae2285746da0674784983cf608c4671, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c160b1ac619956048a63a6f57de37d47, type: 2}

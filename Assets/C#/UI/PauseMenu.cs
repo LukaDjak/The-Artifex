@@ -5,7 +5,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     private bool isPaused = false;
-
+    private bool isAudioMuted = false;
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -27,8 +27,9 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.LoadScene(sceneName);
     }
 
-    public void ToggleAudio(bool toggle)
+    public void ToggleAudio()
     {
-        Debug.Log($"Audio: {(toggle ? "On" : "Off")}");
+        isAudioMuted = !isAudioMuted;
+        Debug.Log($"Audio: {(isAudioMuted ? "On" : "Off")}");
     }
 }
