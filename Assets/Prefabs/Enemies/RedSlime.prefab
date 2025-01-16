@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9c0ff1905a6ba4ca5f9f391ec01c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Blue Slime
+  enemyName: Red Slime
   maxHealth: 60
   minAura: 2
   maxAura: 10
@@ -203,3 +203,4 @@ MonoBehaviour:
   attackCooldown: 1.2
   currentHealth: 0
   jumpForce: 7
+  jumpCooldown: 0.75

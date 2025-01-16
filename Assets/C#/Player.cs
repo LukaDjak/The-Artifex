@@ -49,9 +49,12 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger("Hurt");
         health -= damage;
-        UpdateBars();
         if (health <= 0)
+        {
+            health = 0;
             Die();
+        }
+        UpdateBars();
     }
 
     public void Die()

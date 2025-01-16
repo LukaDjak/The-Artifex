@@ -1554,16 +1554,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: TogglePanel
-        m_Mode: 3
+      - m_Target: {fileID: 936138956}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &591604746
@@ -2686,6 +2686,7 @@ GameObject:
   - component: {fileID: 936138954}
   - component: {fileID: 936138953}
   - component: {fileID: 936138952}
+  - component: {fileID: 936138956}
   m_Layer: 5
   m_Name: GUI
   m_TagString: Untagged
@@ -2779,6 +2780,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &936138956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936138951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcf42344068bcb4ab50ff8064c7b60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 1142076044}
 --- !u!1 &964439265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,14 +2951,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: TogglePanel
-        m_Mode: 3
+      - m_Target: {fileID: 936138956}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3139,7 +3153,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3799,16 +3813,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: TogglePanel
-        m_Mode: 3
+      - m_Target: {fileID: 936138956}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Forest
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1454040909
@@ -6722,63 +6736,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1964378903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1803620926
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.9201095
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.12955391
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2732330209608492956, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8991205406956968565, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
-      propertyPath: m_Name
-      value: RedSlime
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9bfef92e62a4c6b4ab975b0f099816c7, type: 3}
 --- !u!1 &1887272625
 GameObject:
   m_ObjectHideFlags: 0
@@ -7645,7 +7602,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.65002453}
-  m_Size: {x: 0.61992383, y: 1.1774056}
+  m_Size: {x: 0.7341341, y: 1.1774056}
   m_Direction: 0
 --- !u!114 &6617674840533067098
 MonoBehaviour:
@@ -7676,7 +7633,6 @@ SceneRoots:
   - {fileID: 1738813950}
   - {fileID: 1964378903}
   - {fileID: 1401960235}
-  - {fileID: 1532112069}
-  - {fileID: 1803620926}
   - {fileID: 936138955}
   - {fileID: 1142076049}
+  - {fileID: 1532112069}

@@ -51,8 +51,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        Debug.Log($"{enemyName} has been defeated!");
-
         //some kind of death effect or animation
 
         player.GetComponent<Player>().aura += Random.Range(minAura, maxAura);

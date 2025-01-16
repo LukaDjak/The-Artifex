@@ -16,7 +16,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         // Handle attack input and cooldown
-        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1")) // "Fire1" is the default attack input
+        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1") && Time.timeScale > 0) // "Fire1" is the default attack input
         {
             Attack();
             attackCooldownTimer = attackCooldown; // Reset cooldown timer
@@ -37,10 +37,7 @@ public class PlayerCombat : MonoBehaviour
         foreach (var enemyCollider in enemiesHit)
         {
             if (enemyCollider.CompareTag("Enemy"))
-            {
-                Debug.Log(enemyCollider.gameObject);
                 enemyCollider.GetComponent<Enemy>().TakeDamage(damage);
-            }
         }
     }
 
