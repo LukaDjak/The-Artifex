@@ -4,27 +4,30 @@
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float          speed = 4.0f;
-    [SerializeField] private float          jumpForce = 7.5f;
-    [SerializeField] private LayerMask      groundLayer;
+    public float speed = 4.0f;
+    public float jumpForce = 7.5f;
+    [SerializeField] private float sprintMultiplier = 2f;
+    [SerializeField] private float dashSpeed = 150f;
+    [SerializeField] private float dashTime = 0.5f;
+    [SerializeField] private LayerMask groundLayer;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+    private float xInput, coyoteCounter, jumpBufferCounter, currentDashTime;
+    private bool isGrounded, isDashing, canDash, facingRight = true;
+    private Player player;
+
+    [HideInInspector] public bool dashActive = false;
 
     [Header("Jump Mechanics")]
-    [SerializeField] private float          coyoteTime = 0.2f;
-    [SerializeField] private float          jumpBufferTime = 0.2f;
-
-    private Rigidbody2D                     rb;
-    private Animator                        animator;
-
-    private float                           xInput;
-    private float                           coyoteCounter;
-    private float                           jumpBufferCounter;
-    private bool                            isGrounded;
-    private bool                            facingRight = true;
+    [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.2f;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -32,50 +35,90 @@ public class PlayerMovement : MonoBehaviour
         xInput = Input.GetAxis("Horizontal");
         isGrounded = Physics2D.CircleCast(transform.position, .3f, Vector2.down, 0.1f, groundLayer);
 
-        //coyote time
-        if (isGrounded)
-            coyoteCounter = coyoteTime;
-        else
-            coyoteCounter -= Time.deltaTime;
+        //coyote Time
+        coyoteCounter = isGrounded ? coyoteTime : coyoteCounter - Time.deltaTime;
 
-        //jump buffer
-        jumpBufferCounter = Input.GetButtonDown("Jump") ? jumpBufferTime : jumpBufferCounter - Time.deltaTime;
+        //jump Buffer
+        if (Input.GetButtonDown("Jump"))
+            jumpBufferCounter = jumpBufferTime;
+
+        if (jumpBufferCounter > 0 && coyoteCounter > 0)
+        {
+            Jump();
+            jumpBufferCounter = 0;
+        }
+
+        //dash
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isGrounded && !isDashing && dashActive && canDash) 
+            StartDash();
+
+        if (isDashing) 
+            Dash();
 
         //player flip
-        if ((xInput > 0 && !facingRight) || (xInput < 0 && facingRight))
-            Flip();
+        if ((xInput > 0 && !facingRight) || (xInput < 0 && facingRight)) Flip();
 
-        //jump
-        if (jumpBufferCounter > 0 && coyoteCounter > 0)
-            Jump();
-
-        //update animator parameters
+        //animator parameters
         animator.SetFloat("AirSpeed", rb.velocity.y);
         animator.SetBool("Grounded", isGrounded);
         animator.SetInteger("AnimState", Mathf.Abs(xInput) > Mathf.Epsilon ? 2 : 0);
-
-        //TEMP - ANIM TESTING
-        if (Input.GetKeyDown(KeyCode.R)) animator.SetTrigger("Attack");
-        if (Input.GetKeyDown(KeyCode.T)) animator.SetTrigger("Recover");
     }
 
-    private void FixedUpdate() => rb.velocity = new Vector2(xInput * speed, rb.velocity.y);
+    private void FixedUpdate()
+    {
+        if (!isDashing)
+        {
+            float moveSpeed = speed;
+            if (Input.GetKey(KeyCode.LeftShift) && xInput != 0 && player.stamina > 0)
+            {
+                player.StartSprinting(xInput);
+                moveSpeed *= sprintMultiplier;
+            }
+            else
+                player.StopSprinting();
+
+            rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
+        }
+    }
 
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteCounter = 0;
-        jumpBufferCounter = 0;
         animator.SetTrigger("Jump");
-        if (rb.velocity.y == 12 && !isGrounded) //some kind of effect for double jump
-            Debug.Log("secondJump");
+        canDash = true;
+    }
+
+    private void StartDash()
+    {
+        isDashing = true;
+        canDash = false;
+        currentDashTime = dashTime;
+    }
+
+    private void Dash()
+    {
+        rb.velocity = new Vector2((facingRight ? 1 : -1) * dashSpeed, rb.velocity.y);
+        currentDashTime -= Time.deltaTime;
+        if (currentDashTime <= 0) StopDash();
+    }
+
+    private void StopDash()
+    {
+        isDashing = false;
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
+
+    //deal some damage to enemies when dashing into them
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDashing && collision.gameObject.TryGetComponent<Enemy>(out Enemy e))
+            e.TakeDamage(10);
     }
 }
