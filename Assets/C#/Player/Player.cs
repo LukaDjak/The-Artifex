@@ -3,27 +3,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class Player : MonoBehaviour
-{
+{ 
     [SerializeField] private Slider healthBar, auraBar, staminaBar;
     [SerializeField] private TMP_Text healthText, auraText;
-
     [SerializeField] private int maxHealth, maxAura;
     [SerializeField] private float maxStamina;
-
     [SerializeField] private GameObject sfxPlayerDeath;
 
     [HideInInspector] public int health, aura;
     [HideInInspector] public float stamina;
-
-    [HideInInspector] public bool isDead, isSprinting, infiniteStamina;
+    [HideInInspector] public bool infiniteStamina;
 
     private Animator animator;
+    private readonly float staminaRechargeRate = 75f, staminaRechargeDelay = 2f;
     private float rechargeTimer;
-
-    private readonly float staminaDrainRate = 50f, staminaRechargeRate = 75f, staminaRechargeDelay = 2f;
-
 
     private void Start()
     {
@@ -44,7 +40,7 @@ public class Player : MonoBehaviour
     {
         HandleStamina();
         staminaBar.value = stamina;
-        staminaBar.gameObject.SetActive(stamina < maxStamina || isSprinting);
+        staminaBar.gameObject.SetActive(stamina < maxStamina);
     }
 
     public void UpdateBars()
@@ -53,6 +49,25 @@ public class Player : MonoBehaviour
         auraText.text = aura.ToString();
         healthBar.DOValue(health, 0.3f);
         auraBar.DOValue(aura, 0.3f);
+    }
+
+    public void ReduceStamina(float amount)
+    {
+        if (!infiniteStamina)
+        {
+            stamina -= amount * Time.deltaTime;
+            rechargeTimer = 0f;
+            stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        }
+    }
+
+    private void HandleStamina()
+    {
+        if (!infiniteStamina && rechargeTimer >= staminaRechargeDelay)
+            stamina += staminaRechargeRate * Time.deltaTime;
+
+        rechargeTimer += Time.deltaTime;
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
     }
 
     public void TakeDamage(int damage)
@@ -72,31 +87,6 @@ public class Player : MonoBehaviour
     {
         Instantiate(sfxPlayerDeath, transform.position, Quaternion.identity);
         animator.SetTrigger("Death");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void StartSprinting(float xInput)
-    {
-        if (stamina > 0 && Mathf.Abs(xInput) > 0)
-        {
-            isSprinting = true;
-            rechargeTimer = 0f;
-        }
-    }
-
-    public void StopSprinting() => isSprinting = false;
-    
-    private void HandleStamina()
-    {
-        if (infiniteStamina)
-            stamina = maxStamina;
-        else if (isSprinting)
-        {
-            stamina -= staminaDrainRate * Time.deltaTime;
-            rechargeTimer = 0f;
-        }
-        else if ((rechargeTimer += Time.deltaTime) >= staminaRechargeDelay)
-            stamina += staminaRechargeRate * Time.deltaTime;
-        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        LevelManager.instance.GameOver();
     }
 }

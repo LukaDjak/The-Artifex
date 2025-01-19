@@ -69,10 +69,10 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected bool ShouldChase() =>
-        Vector2.Distance(transform.position, player.transform.position) <= chaseRange;    
+        Vector2.Distance(transform.position, player.transform.position) <= chaseRange && !LevelManager.instance.IsGameOver();    
     
     protected bool ShouldAttack() =>
-        Vector2.Distance(transform.position, player.transform.position) <= attackRange;
+        Vector2.Distance(transform.position, player.transform.position) <= attackRange && !LevelManager.instance.IsGameOver();
 
     protected void Flash()
     {

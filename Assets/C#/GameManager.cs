@@ -20,8 +20,14 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string loadSceneName, string unloadSceneName = null)
     {
         if (unloadSceneName != null || currentSceneName != null)
-            SceneManager.UnloadSceneAsync(unloadSceneName != null ? unloadSceneName : currentSceneName);
+            SceneManager.UnloadSceneAsync(unloadSceneName ?? currentSceneName);
         SceneManager.LoadSceneAsync(loadSceneName, LoadSceneMode.Additive);
         currentSceneName = loadSceneName;
+    }
+
+    //temporary
+    private void OnLevelWasLoaded(int level)
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(level));
     }
 }

@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private float xInput, coyoteCounter, jumpBufferCounter, currentDashTime;
-    private bool isGrounded, isDashing, canDash, facingRight = true;
+    private bool isGrounded, isDashing, canDash, isSprinting, facingRight = true;
     private Player player;
 
     [HideInInspector] public bool dashActive = false;
@@ -32,51 +32,59 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        xInput = Input.GetAxis("Horizontal");
-        isGrounded = Physics2D.CircleCast(transform.position, .3f, Vector2.down, 0.1f, groundLayer);
-
-        //coyote Time
-        coyoteCounter = isGrounded ? coyoteTime : coyoteCounter - Time.deltaTime;
-
-        //jump Buffer
-        if (Input.GetButtonDown("Jump"))
-            jumpBufferCounter = jumpBufferTime;
-
-        if (jumpBufferCounter > 0 && coyoteCounter > 0)
+        if (!LevelManager.instance.IsGameOver())
         {
-            Jump();
-            jumpBufferCounter = 0;
+            xInput = Input.GetAxis("Horizontal");
+            isGrounded = Physics2D.CircleCast(transform.position, .3f, Vector2.down, 0.1f, groundLayer);
+
+            //coyote Time
+            coyoteCounter = isGrounded ? coyoteTime : coyoteCounter - Time.deltaTime;
+
+            //jump Buffer
+            if (Input.GetButtonDown("Jump"))
+                jumpBufferCounter = jumpBufferTime;
+
+            if (jumpBufferCounter > 0 && coyoteCounter > 0)
+            {
+                Jump();
+                jumpBufferCounter = 0;
+            }
+
+            //sprint
+            if (Input.GetKey(KeyCode.LeftShift) && xInput != 0 && player.stamina > 0)
+            {
+                isSprinting = true;
+                player.ReduceStamina(50f); //stamina drain rate
+            }
+            else isSprinting = false;
+
+            //dash
+            if (Input.GetKeyDown(KeyCode.LeftControl) && !isGrounded && !isDashing && dashActive && canDash)
+                StartDash();
+
+            if (isDashing)
+                Dash();
+
+            //player flip
+            if ((xInput > 0 && !facingRight) || (xInput < 0 && facingRight)) Flip();
+
+            //animator parameters
+            animator.SetFloat("AirSpeed", rb.velocity.y);
+            animator.SetBool("Grounded", isGrounded);
+            animator.SetInteger("AnimState", Mathf.Abs(xInput) > Mathf.Epsilon ? 2 : 0);
         }
-
-        //dash
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isGrounded && !isDashing && dashActive && canDash) 
-            StartDash();
-
-        if (isDashing) 
-            Dash();
-
-        //player flip
-        if ((xInput > 0 && !facingRight) || (xInput < 0 && facingRight)) Flip();
-
-        //animator parameters
-        animator.SetFloat("AirSpeed", rb.velocity.y);
-        animator.SetBool("Grounded", isGrounded);
-        animator.SetInteger("AnimState", Mathf.Abs(xInput) > Mathf.Epsilon ? 2 : 0);
+        else
+        {
+            rb.velocity = Vector3.zero;
+            animator.SetTrigger("Death");
+        }    
     }
 
     private void FixedUpdate()
     {
-        if (!isDashing)
+        if (!isDashing && !LevelManager.instance.IsGameOver())
         {
-            float moveSpeed = speed;
-            if (Input.GetKey(KeyCode.LeftShift) && xInput != 0 && player.stamina > 0)
-            {
-                player.StartSprinting(xInput);
-                moveSpeed *= sprintMultiplier;
-            }
-            else
-                player.StopSprinting();
-
+            float moveSpeed = speed * (isSprinting ? sprintMultiplier : 1f);
             rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
         }
     }
