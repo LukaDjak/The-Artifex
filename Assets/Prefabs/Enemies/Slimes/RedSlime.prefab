@@ -194,12 +194,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Red Slime
-  maxHealth: 60
+  maxHealth: 44
   minAura: 2
   maxAura: 10
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
-  damage: 15
+  damage: 5
   chaseRange: 4
   attackRange: 0.4
   attackCooldown: 1.2

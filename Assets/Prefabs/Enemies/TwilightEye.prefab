@@ -166,15 +166,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Twilight Eye
-  maxHealth: 150
-  minAura: 5
-  maxAura: 10
+  maxHealth: 100
+  minAura: 7
+  maxAura: 15
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
   damage: 7
   chaseRange: 5
   attackRange: 1
-  attackCooldown: 1.5
+  attackCooldown: 2
   currentHealth: 0
   patrolSpeed: 2
   chaseSpeed: 4

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int maxHealth = 100;
     [SerializeField] private int minAura;
     [SerializeField] private int maxAura;
+    public event Action OnDeath;
 
     [Header("Hurt Flash")]
     [SerializeField] private Material flashMaterial;
@@ -64,7 +66,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         //some kind of death effect or animation
-        player.GetComponent<Player>().aura += Random.Range(minAura, maxAura);
+        OnDeath?.Invoke();
+        player.GetComponent<Player>().aura += UnityEngine.Random.Range(minAura, maxAura);
         Destroy(gameObject);
     }
 

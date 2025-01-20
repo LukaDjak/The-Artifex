@@ -18,6 +18,7 @@ public abstract class Ability : MonoBehaviour
         if (CanUse())
         {
             player.aura -= auraCost;
+            player.UpdateBars();
             isActive = true;
             Activate();
         }
