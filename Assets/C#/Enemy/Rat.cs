@@ -6,11 +6,14 @@ public class Rat : Enemy
     [SerializeField] private float idleDuration = 2f;
     [SerializeField] private float wanderDuration = 3f;
     [SerializeField] private float speed = 2f;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float obstacleDetectionDistance = 1f; //distance to detect obstacles
 
     private float stateTimer; //timer for state transitions
     private float attackCooldownTimer;
     private Vector2 wanderDirection;
-    
+
     private bool isWandering;
     private bool isChasing;
 
@@ -73,16 +76,37 @@ public class Rat : Enemy
         }
 
         if (isWandering)
-            transform.Translate(speed * Time.deltaTime * wanderDirection);
+        {
+            if (IsObstacleInPath())
+                JumpOverObstacle();
+            else
+                transform.Translate(speed * Time.deltaTime * wanderDirection);
+        }
     }
 
     private void ChasePlayer()
     {
         Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * speed * 2, rb.velocity.y);
-        Flip(direction.x);
+
+        if (IsObstacleInPath())
+            JumpOverObstacle();
+        else
+        {
+            rb.velocity = new Vector2(direction.x * speed * 2, rb.velocity.y);
+            Flip(direction.x);
+        }
     }
 
+    private bool IsObstacleInPath()
+    {
+        //check for obstacles in front of the enemy using a raycast
+        Vector2 origin = transform.position;
+        Vector2 direction = new(transform.localScale.x, 0); //forward direction based on facing
+        return Physics2D.Raycast(origin, direction, obstacleDetectionDistance, groundLayer);
+    }
+
+    private void JumpOverObstacle() => rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    
     private void ResetToIdle()
     {
         isChasing = false;
@@ -110,6 +134,6 @@ public class Rat : Enemy
     private void Flip(float direction)
     {
         if (Mathf.Approximately(direction, 0)) return;
-        transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
+        transform.localScale = new Vector3(Mathf.Sign(direction) * 1.2f, transform.localScale.y, transform.localScale.z);
     }
 }

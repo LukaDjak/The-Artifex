@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1180844287
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -883262055, guid: 2ba070d51ef26e5429d1054dc716c718, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,7 +97,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8361134740755505866}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5c61b7d6112cdba4c87e777c64a7dd5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -131,8 +131,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.51}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.13, y: 0.15}
+  m_EdgeRadius: 0.2
 --- !u!50 &7422012227163365020
 Rigidbody2D:
   serializedVersion: 4
@@ -186,6 +186,12 @@ MonoBehaviour:
   idleDuration: 2
   wanderDuration: 3
   speed: 2
+  jumpForce: 7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleDetectionDistance: 1
+  jumpHeightThreshold: 0.5
 --- !u!95 &2204292186083433504
 Animator:
   serializedVersion: 5
