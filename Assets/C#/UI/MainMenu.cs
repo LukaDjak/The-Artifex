@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> panels = new List<GameObject>();
+    [SerializeField] private List<GameObject> panels = new();
 
     public void LoadLevel(string sceneName) => GameManager.Instance.LoadScene(sceneName, "Main");
 

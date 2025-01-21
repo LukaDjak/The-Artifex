@@ -68,6 +68,7 @@ public abstract class Enemy : MonoBehaviour
         //some kind of death effect or animation
         OnDeath?.Invoke();
         player.GetComponent<Player>().aura += UnityEngine.Random.Range(minAura, maxAura);
+        GameManager.gameData.total_kills++;
         Destroy(gameObject);
     }
 

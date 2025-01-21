@@ -3,6 +3,8 @@ using UnityEngine;
 public class Slime : Enemy
 {
     [SerializeField] private float jumpForce = 7f; //vertical jump force
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float obstacleDetectionDistance = 1f; //distance to detect obstacles
 
     private float jumpCooldownTimer;
     private float attackCooldownTimer;
@@ -56,7 +58,15 @@ public class Slime : Enemy
     }
 
     public override void Attack() => player.GetComponent<Player>().TakeDamage(damage);
-    
+
+    private bool IsObstacleInPath()
+    {
+        //check for obstacles in front of the enemy using a raycast
+        Vector2 origin = transform.position;
+        Vector2 direction = new(transform.localScale.x, 0); //forward direction based on facing
+        return Physics2D.Raycast(origin, direction, obstacleDetectionDistance, groundLayer);
+    }
+
     protected override void Die()
     {
         animator.SetTrigger("Death");

@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        GameManager.gameData.total_games_played++;
+
         health = maxHealth;
         aura = 0;
         stamina = maxStamina;

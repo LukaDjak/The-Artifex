@@ -5,79 +5,73 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawning Settings")]
-    [SerializeField] private int totalEnemiesToSpawn;
-    [SerializeField] private int phases;
-    [SerializeField] private float spawnMinRadius = 10f; //minimum spawn distance from the player
-    [SerializeField] private float spawnMaxRadius = 20f; //maximum spawn distance from the player
-    [SerializeField] private float spawnInterval = 1f;
-    [SerializeField] private float fightDuration; //duration of the fight phase
-    [SerializeField] private float restPeriod = 5f; //duration of rest periods
+    [SerializeField] private int enemiesPerFight = 10; // Number of enemies to spawn per fight phase
+    [SerializeField] private float spawnMinRadius = 10f; // Minimum spawn distance from the player
+    [SerializeField] private float spawnMaxRadius = 20f; // Maximum spawn distance from the player
+    [SerializeField] private float spawnInterval = 1f; // Interval between spawns
+    [SerializeField] private float fightDuration = 30f; // Duration of the fight phase
+    [SerializeField] private float restPeriod = 5f; // Duration of rest periods
 
     [System.Serializable]
     public class EnemyType
     {
-        public GameObject enemyPrefab;
-        public float spawnProbability; //probability of spawning this type
+        public GameObject enemyPrefab; // Enemy prefab
+        public float spawnProbability; // Probability of spawning this type
     }
     [Header("Enemy Types")]
-    [SerializeField] private List<EnemyType> enemyTypes = new();
+    [SerializeField] private List<EnemyType> enemyTypes = new List<EnemyType>();
 
     [Header("Map Boundaries")]
-    [SerializeField] private Vector2 mapMinBounds; //bottom-left corner of the map
-    [SerializeField] private Vector2 mapMaxBounds; //top-right corner of the map
+    [SerializeField] private Vector2 mapMinBounds; // Bottom-left corner of the map
+    [SerializeField] private Vector2 mapMaxBounds; // Top-right corner of the map
 
-    private Transform player;
-    private Camera mainCamera;
-    private int enemiesPerPhase; // = totalEnemies / phases 
-    private int enemiesSpawnedInPhase = 0; //count of spawned enemies in the current phase
-    private int currentPhase = 0; //current phase index
-    //private bool isResting = false;
-    private bool stopSpawning = false; //stops spawning when needed
-    private float fightTimer = 0f;
-    private readonly List<GameObject> activeEnemies = new(); //tracks active enemies
+    private Transform player; // Reference to the player
+    private Camera mainCamera; // Reference to the main camera
+    private int enemiesSpawnedInFight = 0; // Count of spawned enemies in the current fight
+    private bool stopSpawning = false; // Stops spawning when player dies
+    private float fightTimer = 0f; // Tracks the remaining fight time
+    private List<GameObject> activeEnemies = new List<GameObject>(); // Tracks active enemies
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        mainCamera = Camera.main;
-        enemiesPerPhase = totalEnemiesToSpawn / phases;
-        StartCoroutine(HandlePhases());
+        mainCamera = Camera.main; // Get the main camera
+        StartCoroutine(HandleFightCycle());
     }
 
-    private IEnumerator HandlePhases()
+    private IEnumerator HandleFightCycle()
     {
-        while (currentPhase < phases && !stopSpawning)
+        while (!stopSpawning)
         {
-            //start fight phase
+            // Start fight phase
             fightTimer = fightDuration;
-            enemiesSpawnedInPhase = 0;
+            enemiesSpawnedInFight = 0;
             StartCoroutine(SpawnEnemiesDuringFight());
 
-            //fight phase
+            // Wait for fight phase to end
             yield return new WaitForSeconds(fightDuration);
 
-            //stop spawning and wait until all enemies are defeated
+            // Stop spawning and wait until all enemies are defeated
             stopSpawning = true;
             yield return new WaitUntil(() => activeEnemies.Count == 0);
 
-            //code for rest phase - spawn the chest, ...
+            // Debug chest spawn (rest phase will go here later)
             Debug.Log("Rest phase started! Chest will spawn here.");
 
-            //rest period
+            // Rest period
             yield return new WaitForSeconds(restPeriod);
 
-            //prepare for the next phase
+            // Prepare for the next fight
             stopSpawning = false;
-            currentPhase++;
         }
     }
 
     private IEnumerator SpawnEnemiesDuringFight()
     {
-        while (fightTimer > 0 && enemiesSpawnedInPhase < enemiesPerPhase && !stopSpawning)
+        while (fightTimer > 0 && enemiesSpawnedInFight < enemiesPerFight && !stopSpawning)
         {
             SpawnEnemy();
-            enemiesSpawnedInPhase++;
+            enemiesSpawnedInFight++;
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -86,19 +80,19 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyTypes.Count == 0 || player == null) return;
 
-        //choose enemy based on probabilities
+        // Choose enemy based on probabilities
         GameObject enemyToSpawn = ChooseEnemy();
         if (enemyToSpawn == null) return;
 
-        //calculate a valid spawn position
+        // Calculate a valid spawn position
         Vector2 spawnPosition = GetValidSpawnPosition();
         if (spawnPosition == Vector2.zero) return;
 
-        //spawn enemy
+        // Instantiate enemy
         GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
         activeEnemies.Add(newEnemy);
 
-        //track enemy death
+        // Track enemy death
         newEnemy.GetComponent<Enemy>().OnDeath += () => activeEnemies.Remove(newEnemy);
     }
 
@@ -122,26 +116,26 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector2 GetValidSpawnPosition()
     {
-        const int maxAttempts = 100;
+        const int maxAttempts = 100; // Prevent infinite loops
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
-            //generate a random direction and distance
+            // Generate a random direction and distance
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             float distance = Random.Range(spawnMinRadius, spawnMaxRadius);
 
-            //calculate spawn position around the player
+            // Calculate spawn position around the player
             Vector2 spawnPosition = (Vector2)player.position + randomDirection * distance;
 
-            //check if the position is within the map bounds
+            // Check if the position is within the map bounds
             if (!IsWithinMapBounds(spawnPosition)) continue;
 
-            //check if the position is outside of the camera view
+            // Check if the position is outside of the camera view
             if (!IsVisibleToCamera(spawnPosition))
                 return spawnPosition;
         }
 
         Debug.LogWarning("Failed to find a valid spawn position after maximum attempts.");
-        return Vector2.zero; //fail-safe: Return an invalid position
+        return Vector2.zero; // Fail-safe: Return an invalid position
     }
 
     private bool IsWithinMapBounds(Vector2 position)
@@ -154,9 +148,14 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
 
-        //check if the position is within the camera's visible area (0 to 1 in viewport space)
+        // Check if the position is within the camera's visible area (0 to 1 in viewport space)
         return viewportPosition.x >= 0 && viewportPosition.x <= 1 &&
                viewportPosition.y >= 0 && viewportPosition.y <= 1 &&
                viewportPosition.z > 0; // Ensure the position is in front of the camera
+    }
+
+    public void StopSpawning()
+    {
+        stopSpawning = true;
     }
 }
