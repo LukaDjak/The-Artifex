@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
         public GameObject enemyPrefab; // Enemy prefab
         public float spawnProbability; // Probability of spawning this type
     }
+
     [Header("Enemy Types")]
     [SerializeField] private List<EnemyType> enemyTypes = new List<EnemyType>();
 
@@ -89,8 +90,13 @@ public class EnemySpawner : MonoBehaviour
         if (spawnPosition == Vector2.zero) return;
 
         // Instantiate enemy
-        GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity, transform);
         activeEnemies.Add(newEnemy);
+        // Pooling ti je sljdeci korak! I to NE Ovak
+        // Pool.Create (sjdfls)
+        // static PoolingSytem
+        // public static GameObject Spawn(this GameObject, Vector3 spawnPosition, Quaternon rotation, Transform parent)
+        // enemyPrefab.Spawn
 
         // Track enemy death
         newEnemy.GetComponent<Enemy>().OnDeath += () => activeEnemies.Remove(newEnemy);
