@@ -11530,11 +11530,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b807cd87969f64c80fbea65586c6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPerFight: 40
+  enemiesPerFight: 60
   spawnMinRadius: 10
   spawnMaxRadius: 20
-  spawnInterval: 2
-  fightDuration: 50
+  spawnInterval: 1.5
+  fightDuration: 90
   restPeriod: 5
   enemyTypes:
   - enemyPrefab: {fileID: 8691590660644402568, guid: df8e44cf5380fa14fbaaeafc2ecc11a7, type: 3}

@@ -16,7 +16,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         // Handle attack input and cooldown
-        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1") && Time.timeScale > 0) // "Fire1" is the default attack input
+        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1") && Time.timeScale > 0 && !LevelManager.instance.IsGameOver()) // "Fire1" is the default attack input
         {
             Attack();
             attackCooldownTimer = attackCooldown; // Reset cooldown timer
