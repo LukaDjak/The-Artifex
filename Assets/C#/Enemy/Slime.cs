@@ -72,6 +72,8 @@ public class Slime : Enemy
                     Quaternion.identity,
                     transform);
 
+                smallSlime.transform.parent = null;
+
                 var slimeComponent = smallSlime.GetComponent<Slime>();
                 smallSlime.transform.localScale *= 0.75f;
                 slimeComponent.attackCooldown *= 1.5f;
