@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActiveCamera : MonoBehaviour
@@ -16,13 +14,6 @@ public class ActiveCamera : MonoBehaviour
             activeCamera.DefaultCamera = cam;
     }
 
-    private void OnEnable()
-    {
-        activeCamera.SetNewCamera(cam);
-    }
-
-    private void OnDisable()
-    {
-        
-    }
+    private void OnEnable() => activeCamera.SetNewCamera(cam);
+    private void OnDisable() => activeCamera.CheckLastCamera();
 }

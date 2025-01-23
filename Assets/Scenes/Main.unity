@@ -1782,7 +1782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff4debe36d8b557479d715aac4f74439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad318ddcc59272544b75d2f0f4e9af3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2284,7 +2284,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Desert
+          m_StringArgument: Swamp
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &626704535
@@ -3102,7 +3102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Map 3
+  m_text: Swamp
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9797fc33545d1a489322e6a18335163, type: 2}
   m_sharedMaterial: {fileID: -4332518346428248331, guid: d9797fc33545d1a489322e6a18335163, type: 2}
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 08a39303898c7144d818f094c3ecce05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3394,7 +3394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a927e297229bcc45b656bb9c2976879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Taiga
+  mapName: Ice
   lockedButton: {fileID: 1594141653}
   selectButton: {fileID: 1471301548}
   requirementsUI: {fileID: 818459845}
@@ -5508,7 +5508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Map 1
+  m_text: Forest
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9797fc33545d1a489322e6a18335163, type: 2}
   m_sharedMaterial: {fileID: -4332518346428248331, guid: d9797fc33545d1a489322e6a18335163, type: 2}
@@ -6888,7 +6888,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Map 2
+  m_text: Ice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9797fc33545d1a489322e6a18335163, type: 2}
   m_sharedMaterial: {fileID: -4332518346428248331, guid: d9797fc33545d1a489322e6a18335163, type: 2}
