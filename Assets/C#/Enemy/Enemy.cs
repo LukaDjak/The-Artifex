@@ -67,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
     {
         //some kind of death effect or animation
         OnDeath?.Invoke();
-        player.GetComponent<Player>().aura += UnityEngine.Random.Range(minAura, maxAura);
+        player.GetComponent<Player>().aura += (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
         GameManager.gameData.total_kills++;
         Destroy(gameObject);
     }
@@ -106,7 +106,7 @@ public abstract class Enemy : MonoBehaviour
     }
 }
 
-/*juicing up enemies
+/* juicing up enemies
 - hurt flash - done
 - blood particles
 - little knockback

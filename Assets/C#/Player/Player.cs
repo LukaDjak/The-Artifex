@@ -2,8 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class Player : MonoBehaviour
 { 
@@ -13,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxStamina;
     [SerializeField] private GameObject sfxPlayerDeath;
 
+    [HideInInspector] public Multipliers chestMultipliers;
     [HideInInspector] public int health, aura;
     [HideInInspector] public float stamina;
     [HideInInspector] public bool infiniteStamina;
@@ -90,5 +89,23 @@ public class Player : MonoBehaviour
         Instantiate(sfxPlayerDeath, transform.position, Quaternion.identity);
         animator.SetTrigger("Death");
         LevelManager.instance.GameOver();
+    }
+}
+
+public class Multipliers
+{
+    public float maxHealthMultiplier = 1f;
+    public float auraMultiplier = 1f;
+    public float speedMultiplier = 1f;
+    public float damageMultiplier = 1f;
+    public float staminaDecreaseMultiplier = 1f;
+    public float healAmount = 50f;
+    public int grenades = 0;
+    public float reviveChanceMultiplier = 0f; //useless for now
+    public float maxStaminaDecreseMultiplier = .3f;
+
+    public void IncreaseMaxValues()
+    {
+        //update max_ values and its sliders
     }
 }
