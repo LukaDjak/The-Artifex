@@ -288,6 +288,8 @@ GameObject:
   - component: {fileID: 8582319683635693820}
   - component: {fileID: 7468484386006024024}
   - component: {fileID: 1583929441940381700}
+  - component: {fileID: 7561000681510862156}
+  - component: {fileID: 3398918433845453572}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -313,7 +315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.402, y: 0.306}
+  m_AnchoredPosition: {x: 0.4, y: 0.306}
   m_SizeDelta: {x: 2.2631, y: 0.2049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8582319683635693820
@@ -379,6 +381,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &7561000681510862156
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030721656437851260}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!111 &3398918433845453572
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030721656437851260}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 18712bacdc50834499fe4bdf7a149cc5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 18712bacdc50834499fe4bdf7a149cc5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3809393583721831668
 GameObject:
   m_ObjectHideFlags: 0

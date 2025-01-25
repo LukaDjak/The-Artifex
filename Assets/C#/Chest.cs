@@ -9,9 +9,14 @@ public class Chest : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image IconUI;
     private Animator animator;
+    private Rigidbody2D rb;
     private bool readyToOpen, isOpened = false;
 
-    private void Start() => animator = GetComponent<Animator>();
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,8 +26,8 @@ public class Chest : MonoBehaviour
             {
                 isOpened = true;
                 animator.SetTrigger("Open");
+                Invoke(nameof(ShowText), .5f);
                 SelectRandomBoost(player);
-                canvas.SetActive(true);
                 Destroy(gameObject, 10f);
             }
         }
@@ -34,6 +39,7 @@ public class Chest : MonoBehaviour
         {
             animator.SetTrigger("Fall");
             readyToOpen = true;
+            rb.isKinematic = true;
         }
     }
 
@@ -64,4 +70,6 @@ public class Chest : MonoBehaviour
             }
         }
     }
+
+    private void ShowText() => canvas.SetActive(true);
 }

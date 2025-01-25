@@ -137,7 +137,6 @@ public class EnemySpawner : MonoBehaviour
 
         //spawn chest
         Instantiate(chestToSpawn, chestPosition, Quaternion.identity);
-        Debug.Log($"Chest spawned: {chestToSpawn.name} at {chestPosition}");
     }
 
     private GameObject ChooseChest()
