@@ -12,16 +12,13 @@ public class AbilityWheel : MonoBehaviour
     [SerializeField] private GameObject[] abilitySlotOverlays;
 
     [Header("Gameplay Settings")]
-    [SerializeField] private float timeScaleWhileOpen = 0.2f; 
+    [SerializeField] private float timeScaleWhileOpen = 0.2f;
 
     private int selectedSlot = -1; //currently selected slot index
     [SerializeField] private Ability[] abilityScripts;
 
-    private void Start()
-    {
-        ToggleWheel(false);
-    }
-
+    private void Start() => ToggleWheel(false);
+    
     private void Update()
     {
         //open/close the wheel with Tab
@@ -36,6 +33,8 @@ public class AbilityWheel : MonoBehaviour
     private void ToggleWheel(bool toggle)
     {
         wheelUI.SetActive(toggle);
+        LevelManager.instance.isUIActive = toggle;
+        LevelManager.instance.OnButtonClick();
         Time.timeScale = toggle ? timeScaleWhileOpen : 1;
         UpdateAbilityUI();
     }

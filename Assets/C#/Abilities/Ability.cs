@@ -6,6 +6,10 @@ public abstract class Ability : MonoBehaviour
     [SerializeField] protected string abilityName;
     [SerializeField] protected int auraCost;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip activationSound;
+    [SerializeField] private AudioClip deactivationSound;
+
     protected Player player;
     protected bool isActive;
 
@@ -19,7 +23,9 @@ public abstract class Ability : MonoBehaviour
         {
             player.aura -= auraCost;
             player.UpdateBars();
+            AudioManager.instance.PlaySFX(activationSound);
             isActive = true;
+
             Activate();
         }
         else
@@ -37,5 +43,6 @@ public abstract class Ability : MonoBehaviour
     protected virtual void Deactivate()
     {
         isActive = false;
+        AudioManager.instance.PlaySFX(deactivationSound);
     }
 }

@@ -11,17 +11,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashTime = 0.5f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Jump Mechanics")]
+    [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.2f;
+
+    [Header("AudioClips")]
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip dashClip;
+
     private Rigidbody2D rb;
     private Animator animator;
-    private float xInput, coyoteCounter, jumpBufferCounter, currentDashTime;
+    private float xInput, coyoteCounter, jumpBufferCounter, currentDashTime, footstepTimer;
+    private readonly float footstepDelay = .33f;
     private bool isGrounded, isDashing, canDash, isSprinting, facingRight = true;
     private Player player;
 
     [HideInInspector] public bool dashActive = false;
-
-    [Header("Jump Mechanics")]
-    [SerializeField] private float coyoteTime = 0.2f;
-    [SerializeField] private float jumpBufferTime = 0.2f;
 
     private void Start()
     {
@@ -45,10 +50,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpBufferCounter = jumpBufferTime;
 
             if (jumpBufferCounter > 0 && coyoteCounter > 0)
-            {
                 Jump();
-                jumpBufferCounter = 0;
-            }
 
             //sprint
             if (Input.GetKey(KeyCode.LeftShift) && xInput != 0 && player.stamina > 0)
@@ -72,12 +74,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("AirSpeed", rb.velocity.y);
             animator.SetBool("Grounded", isGrounded);
             animator.SetInteger("AnimState", Mathf.Abs(xInput) > Mathf.Epsilon ? 2 : 0);
+
+            PlayFootsteps();
         }
         else
-        {
-            rb.velocity = Vector3.zero;
-            animator.SetTrigger("Death");
-        }    
+            rb.velocity = Vector3.zero; 
     }
 
     private void FixedUpdate()
@@ -89,8 +90,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void PlayFootsteps()
+    {
+        if (isGrounded && Mathf.Abs(xInput) > 0 && footstepTimer <= 0f && rb.velocity.x != 0)
+        {
+            AudioManager.instance.PlaySFX(footsteps[Random.Range(0, footsteps.Length)]);
+            footstepTimer = isSprinting ? footstepDelay / sprintMultiplier : footstepDelay;
+        }
+        else if (!isGrounded)
+            footstepTimer = -1f;
+        else
+            footstepTimer -= Time.deltaTime;
+    }
+
     private void Jump()
     {
+        jumpBufferCounter = 0;
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteCounter = 0;
         animator.SetTrigger("Jump");
@@ -101,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         canDash = false;
+        AudioManager.instance.PlaySFX(dashClip);
         currentDashTime = dashTime;
     }
 

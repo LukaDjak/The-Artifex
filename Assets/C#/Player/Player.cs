@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Player : MonoBehaviour
 { 
@@ -24,7 +23,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameManager.gameData.total_games_played++;
-
+        GameManager.gameData.chance_to_respawn = (int)CalculateRespawnChance();
         health = maxHealth;
         aura = 0;
         stamina = maxStamina;
@@ -41,6 +40,7 @@ public class Player : MonoBehaviour
         staminaBar.value = stamina;
         staminaBar.gameObject.SetActive(stamina < maxStamina);
     }
+    private float CalculateRespawnChance() => Mathf.Clamp((GameManager.gameData.total_aura / 10) * 25f, 0, 25f);
 
     public void UpdateBars()
     {
@@ -100,7 +100,19 @@ public class Player : MonoBehaviour
     {
         Instantiate(sfxPlayerDeath, transform.position, Quaternion.identity);
         animator.SetTrigger("Death");
-        LevelManager.instance.GameOver();
+        if (Random.Range(0, 100) <= GameManager.gameData.chance_to_respawn + chestMultipliers.reviveChanceMultiplier * 100)
+            Invoke(nameof(Recover), 2f);
+        else
+            LevelManager.instance.GameOver();
+    }
+
+    public void Recover()
+    {
+        animator.SetTrigger("Recover");
+        health = maxHealth;
+        aura = 0;
+        UpdateBars();
+        //instantiate some kind of aura particle that kills every single enemy in its range
     }
 
     public void IncreaseMaxHealth() => maxHealth = (int)(maxHealth * chestMultipliers.maxHealthMultiplier);
@@ -116,5 +128,5 @@ public class Multipliers
     public float maxStaminaMultiplier = 1f;
     public float healAmount = 50f;
     public int grenades = 0; //useless for now
-    public float reviveChanceMultiplier = 0f; //useless for now
+    public float reviveChanceMultiplier = 0f;
 }

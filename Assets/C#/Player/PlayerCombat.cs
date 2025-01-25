@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private int damage = 10;  // Damage dealt by the player
     [SerializeField] private float attackRange = 1.5f;  // Attack range
     [SerializeField] private float attackCooldown = 1f;  // Cooldown between attacks
+    [SerializeField] private AudioClip attackSound;
 
     private Animator animator;
     private float attackCooldownTimer = 0f;
@@ -16,7 +17,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         // Handle attack input and cooldown
-        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1") && Time.timeScale > 0 && !LevelManager.instance.IsGameOver()) // "Fire1" is the default attack input
+        if (attackCooldownTimer <= 0f && Input.GetButtonDown("Fire1") && Time.timeScale > 0 && !LevelManager.instance.IsGameOver() && !LevelManager.instance.isUIActive) // "Fire1" is the default attack input
         {
             Attack();
             attackCooldownTimer = attackCooldown; // Reset cooldown timer
@@ -29,6 +30,7 @@ public class PlayerCombat : MonoBehaviour
     {
         // Trigger attack animation
         animator.SetTrigger("Attack");
+        AudioManager.instance.PlaySFX(attackSound);
 
         // Detect enemies in attack range using a Physics2D overlap
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position + new Vector3(0, 0.5f, 0), attackRange);

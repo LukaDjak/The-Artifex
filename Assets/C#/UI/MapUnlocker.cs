@@ -25,7 +25,7 @@ public class Requirement
         int currentAmount = GetCurrentAmountFromGameManager();
 
         description.text = requirementName;
-        progressText.text = $"{currentAmount}/{requiredAmount}";
+        progressText.text = $"{Mathf.Clamp(currentAmount, 0, requiredAmount)}/{requiredAmount}";
 
         progressionSlider.maxValue = requiredAmount;
         progressionSlider.value = currentAmount;

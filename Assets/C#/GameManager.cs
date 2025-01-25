@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,8 +21,6 @@ public class GameManager : MonoBehaviour
 
         LoadScene("Main");
 
-        PlayerPrefs.DeleteAll();
-
         gameData = SaveAndLoad.LoadGameData();
         settings = SaveAndLoad.LoadSettings();
         collectedArtifacts = SaveAndLoad.LoadCollectedArtifacts();
@@ -36,6 +33,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(loadSceneName, LoadSceneMode.Additive);
         currentSceneName = loadSceneName;
     }
+
     public Artifact GetArtifactByName(string artifactName) => allArtifacts.Find(artifact => artifact.name == artifactName);
 
     private void OnApplicationQuit()
@@ -52,6 +50,7 @@ public class GameData
     public int total_kills;
     public int number_of_artifacts;
     public int total_aura;
+    public int chance_to_respawn;
 }
 
 public class Settings

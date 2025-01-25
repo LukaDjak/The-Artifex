@@ -205,10 +205,6 @@ MonoBehaviour:
   attackCooldown: 1.5
   currentHealth: 0
   jumpForce: 7
-  maxJumpForce: 10
-  horizontalJumpForce: 3
-  detectionDistance: 1.2
-  ledgeHeightThreshold: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

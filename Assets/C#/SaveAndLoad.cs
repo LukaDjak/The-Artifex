@@ -8,6 +8,7 @@ public static class SaveAndLoad
     private const string KILLS = "kills";
     private const string ARTIFACTS = "artifacts";
     private const string AURA = "aura";
+    private const string RESPAWN_CHANCE = "respawn";
 
     //settings Keys
     private const string VOLUME = "volume";
@@ -25,7 +26,8 @@ public static class SaveAndLoad
             total_games_played = PlayerPrefs.GetInt(GAMES_PLAYED, 0),
             total_kills = PlayerPrefs.GetInt(KILLS, 0),
             number_of_artifacts = PlayerPrefs.GetInt(ARTIFACTS, 0),
-            total_aura = PlayerPrefs.GetInt(AURA, 0)
+            total_aura = PlayerPrefs.GetInt(AURA, 0),
+            chance_to_respawn = PlayerPrefs.GetInt(RESPAWN_CHANCE, 0)
         };
         return gameData;
     }
@@ -36,6 +38,7 @@ public static class SaveAndLoad
         PlayerPrefs.SetInt(KILLS, gameData.total_kills);
         PlayerPrefs.SetInt(ARTIFACTS, gameData.number_of_artifacts);
         PlayerPrefs.SetInt(AURA, gameData.total_aura);
+        PlayerPrefs.SetInt(RESPAWN_CHANCE, gameData.chance_to_respawn);
     }
 
     //settings

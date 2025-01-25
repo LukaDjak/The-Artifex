@@ -68,7 +68,9 @@ public abstract class Enemy : MonoBehaviour
     {
         //some kind of death effect or animation
         OnDeath?.Invoke();
-        player.GetComponent<Player>().aura += (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
+        int auraToGive = (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
+        player.GetComponent<Player>().aura += auraToGive;
+        GameManager.gameData.total_aura += auraToGive;
         GameManager.gameData.total_kills++;
 
         TryDropArtifact(transform.position);
