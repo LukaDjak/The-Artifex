@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public static Settings settings = new();
     [HideInInspector] public List<string> collectedArtifacts;
 
-    [Header("Artifact System")]
-    public List<Artifact> allArtifacts;
+    public List<Artifact> artifacts;
 
     private string currentSceneName;
 
@@ -34,7 +33,7 @@ public class GameManager : MonoBehaviour
         currentSceneName = loadSceneName;
     }
 
-    public Artifact GetArtifactByName(string artifactName) => allArtifacts.Find(artifact => artifact.name == artifactName);
+    public Artifact GetArtifactByName(string artifactName) => artifacts.Find(artifact => artifact.name == artifactName);
 
     private void OnApplicationQuit()
     {

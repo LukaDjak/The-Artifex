@@ -197,6 +197,8 @@ MonoBehaviour:
   maxHealth: 25
   minAura: 0
   maxAura: 5
+  enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
+  enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
   damage: 2
@@ -208,3 +210,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpClips:
+  - {fileID: 8300000, guid: b7be6aff61b1ba349a4017dc931265a9, type: 3}
+  - {fileID: 8300000, guid: 284672048485e494b9e71f72e4197f8f, type: 3}
+  deathClip: {fileID: 8300000, guid: 5a39fb039c52a744cae3019201809a94, type: 3}

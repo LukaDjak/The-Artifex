@@ -9,6 +9,9 @@ public class Rat : Enemy
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float obstacleDetectionDistance = 1f; //distance to detect obstacles
+    [SerializeField] private AudioClip playerChaseClip;
+    [SerializeField] private AudioClip attackClip;
+    [SerializeField] private AudioClip deathClip;
 
     private float stateTimer; //timer for state transitions
     private float attackCooldownTimer;
@@ -42,6 +45,7 @@ public class Rat : Enemy
             {
                 isChasing = true;
                 animator.SetBool("IsMoving", true);
+                AudioManager.instance.PlaySFX(playerChaseClip);
             }
             ChasePlayer();
         }
@@ -128,7 +132,15 @@ public class Rat : Enemy
     public override void Attack()
     {
         player.GetComponent<Player>().TakeDamage(damage);
+        AudioManager.instance.PlaySFX(enemyAttack);
+        AudioManager.instance.PlaySFX(attackClip);
         animator.SetTrigger("Attack");
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        AudioManager.instance.PlaySFX(deathClip);
     }
 
     private void Flip(float direction)

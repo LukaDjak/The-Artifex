@@ -176,6 +176,7 @@ MonoBehaviour:
   maxHealth: 40
   minAura: 2
   maxAura: 5
+  enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
   damage: 5
@@ -191,7 +192,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   obstacleDetectionDistance: 1
-  jumpHeightThreshold: 0.5
+  playerChaseClip: {fileID: 8300000, guid: 7a4cf5b0d40695842acc8cad736c298f, type: 3}
+  attackClip: {fileID: 8300000, guid: 6cae36a14b8441147ba2c8db169f7a43, type: 3}
+  deathClip: {fileID: 8300000, guid: de7f5ded6d132184eb6d77ccc2bab119, type: 3}
 --- !u!95 &2796601838011064934
 Animator:
   serializedVersion: 5

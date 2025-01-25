@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private int minAura;
     [SerializeField] private int maxAura;
     public event Action OnDeath;
+    [SerializeField] protected AudioClip enemyAttack;
 
     [Header("Hurt Flash")]
     [SerializeField] private Material flashMaterial;
@@ -82,7 +83,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (UnityEngine.Random.Range(0, 10000) != 0) return;
 
-        List<Artifact> uncollected = GameManager.Instance.allArtifacts.FindAll(artifact =>
+        List<Artifact> uncollected = GameManager.Instance.artifacts.FindAll(artifact =>
             !GameManager.Instance.collectedArtifacts.Contains(artifact.name));
 
         if (uncollected.Count > 0)

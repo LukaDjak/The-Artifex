@@ -169,6 +169,8 @@ MonoBehaviour:
   maxHealth: 125
   minAura: 7
   maxAura: 15
+  enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
+  enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
   damage: 8
@@ -182,3 +184,4 @@ MonoBehaviour:
   minFlightTime: 2
   maxFlightTime: 5
   secondaryAttackChance: 20
+  spawnAndDeathClip: {fileID: 8300000, guid: 5e6559e0b426fbc44ba2f948648aaaf6, type: 3}

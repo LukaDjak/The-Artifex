@@ -12,6 +12,9 @@ public class Eye : Enemy
     [Header("Attack Settings")]
     [SerializeField] private int secondaryAttackChance = 20;
 
+    [Space(15f)]
+    [SerializeField] private AudioClip spawnAndDeathClip;
+
     private float patrolDirectionTimer = 0f;
 
     private Vector2 patrolPoint;
@@ -21,6 +24,7 @@ public class Eye : Enemy
     {
         base.Start();
         patrolPoint = new Vector2(transform.position.x + patrolRange, transform.position.y);
+        AudioManager.instance.PlaySFX(spawnAndDeathClip);
         animator = GetComponent<Animator>();
     }
 
@@ -113,6 +117,8 @@ public class Eye : Enemy
     {
         isAttacking = true;
         attackTimer = attackCooldown;
+        AudioManager.instance.PlaySFX(enemyAttack);
+
 
         //decide attack type (primary or secondary)
         if (Random.Range(0, 100) < secondaryAttackChance)
@@ -137,6 +143,7 @@ public class Eye : Enemy
     protected override void Die()
     {
         animator.SetTrigger("Death");
+        AudioManager.instance.PlaySFX(spawnAndDeathClip);
         base.Die();
     }
 }

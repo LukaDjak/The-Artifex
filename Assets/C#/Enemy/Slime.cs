@@ -4,6 +4,8 @@ public class Slime : Enemy
 {
     [SerializeField] private float jumpForce = 7f; //vertical jump force
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private AudioClip[] jumpClips;
+    [SerializeField] private AudioClip deathClip;
 
     private float jumpCooldownTimer;
     private float attackCooldownTimer;
@@ -45,6 +47,7 @@ public class Slime : Enemy
             : Random.value > 0.5f ? 1f : -1f;
 
         rb.velocity = new Vector2(direction * jumpForce / 2, jumpForce);
+        AudioManager.instance.PlaySFX(jumpClips[Random.Range(0, jumpClips.Length)]);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -52,6 +55,7 @@ public class Slime : Enemy
         if (collision.gameObject.CompareTag("Player") && attackCooldownTimer <= 0f)
         {
             Attack();
+            AudioManager.instance.PlaySFX(enemyAttack);
             attackCooldownTimer = attackCooldown; //reset attack cooldown
         }
     }
@@ -61,6 +65,7 @@ public class Slime : Enemy
     protected override void Die()
     {
         animator.SetTrigger("Death");
+        AudioManager.instance.PlaySFX(deathClip);
 
         //spawn smaller slimes
         if (!smallerSlime)

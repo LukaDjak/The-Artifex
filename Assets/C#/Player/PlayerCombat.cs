@@ -7,6 +7,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float attackRange = 1.5f;  // Attack range
     [SerializeField] private float attackCooldown = 1f;  // Cooldown between attacks
     [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip enemyHurt;
 
     private Animator animator;
     private float attackCooldownTimer = 0f;
@@ -34,6 +35,9 @@ public class PlayerCombat : MonoBehaviour
 
         // Detect enemies in attack range using a Physics2D overlap
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position + new Vector3(0, 0.5f, 0), attackRange);
+
+        if(enemiesHit.Length > 0 )
+            AudioManager.instance.PlaySFX(enemyHurt);
 
         // Loop through the enemies and apply damage if hit
         foreach (var enemyCollider in enemiesHit)

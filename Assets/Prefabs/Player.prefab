@@ -91,7 +91,7 @@ MonoBehaviour:
   maxHealth: 100
   maxAura: 100
   maxStamina: 100
-  sfxPlayerDeath: {fileID: 339978976127747481, guid: f731593490177514baf149c240ff6441, type: 3}
+  playerHurt: {fileID: 8300000, guid: 1caf08385447db1458a1d7897cf21da7, type: 3}
   health: 0
   aura: 0
   stamina: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   attackRange: 0.69
   attackCooldown: 0.4
   attackSound: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
+  enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
 --- !u!114 &103499211623343585
 MonoBehaviour:
   m_ObjectHideFlags: 0

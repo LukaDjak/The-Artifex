@@ -125,7 +125,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.08109351}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.3483135, y: 0.41325724}
     oldSize: {x: 0.46875, y: 0.34375}
     newSize: {x: 0.4375, y: 0.3125}
     adaptiveTilingThreshold: 0.5
@@ -170,7 +170,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.3483135, y: 0.41325724}
     oldSize: {x: 0.46875, y: 0.34375}
     newSize: {x: 0.4375, y: 0.3125}
     adaptiveTilingThreshold: 0.5
@@ -255,6 +255,8 @@ MonoBehaviour:
   canvas: {fileID: 1030721656437851260}
   text: {fileID: 6470667350176120829}
   IconUI: {fileID: 1373400025796147246}
+  fallClip: {fileID: 8300000, guid: 4c87b6b9feada8a48a31bbbaa8a483e3, type: 3}
+  openClip: {fileID: 8300000, guid: d5a1f4c3768220641ba70eaa3a7844c9, type: 3}
 --- !u!95 &1814287260784021979
 Animator:
   serializedVersion: 5

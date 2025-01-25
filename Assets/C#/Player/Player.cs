@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text healthText, auraText;
     [SerializeField] private int maxHealth, maxAura;
     [SerializeField] private float maxStamina;
-    [SerializeField] private GameObject sfxPlayerDeath;
+    [SerializeField] private AudioClip playerHurt;
 
     [HideInInspector] public Multipliers chestMultipliers = new();
     [HideInInspector] public int health, aura;
@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
         }
         else
             animator.SetTrigger("Hurt");
+        AudioManager.instance.PlaySFX(playerHurt);
         UpdateBars();
     }
 
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Instantiate(sfxPlayerDeath, transform.position, Quaternion.identity);
+        AudioManager.instance.PlaySFX(playerHurt);
         animator.SetTrigger("Death");
         if (Random.Range(0, 100) <= GameManager.gameData.chance_to_respawn + chestMultipliers.reviveChanceMultiplier * 100)
             Invoke(nameof(Recover), 2f);

@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private TMP_Text text;
     [SerializeField] private Image IconUI;
+    [SerializeField] private AudioClip fallClip, openClip;
     private Animator animator;
     private Rigidbody2D rb;
     private bool readyToOpen, isOpened = false;
@@ -26,6 +27,7 @@ public class Chest : MonoBehaviour
             {
                 isOpened = true;
                 animator.SetTrigger("Open");
+                AudioManager.instance.PlaySFX(openClip);
                 Invoke(nameof(ShowText), .5f);
                 SelectRandomBoost(player);
                 Destroy(gameObject, 10f);
@@ -38,6 +40,7 @@ public class Chest : MonoBehaviour
         if (!readyToOpen)
         {
             animator.SetTrigger("Fall");
+            AudioManager.instance.PlaySFX(fallClip);
             readyToOpen = true;
             rb.isKinematic = true;
         }
