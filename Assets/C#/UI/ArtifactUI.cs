@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ArtifactUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject popupUI;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Image iconImage;
+
+    public void ShowPopup(Artifact artifact)
     {
-        
+        popupUI.SetActive(true);
+        nameText.text = artifact.name;
+        descriptionText.text = artifact.description;
+        iconImage.sprite = artifact.icon;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClosePopup()
     {
-        
+        popupUI.SetActive(false);
     }
 }

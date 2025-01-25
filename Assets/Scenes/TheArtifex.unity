@@ -151,6 +151,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5389219c546c4e045afdb16f3b686203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectedArtifacts: []
+  allArtifacts:
+  - name: Artifact 1
+    description: 1
+    icon: {fileID: 1542491294, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 3645494509456892578, guid: 0b2dac1e9dfbf3147951cab3cfa1b9e2, type: 3}
+  - name: Artifact 2
+    description: 2
+    icon: {fileID: -780010580, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 6513155447734668612, guid: ab01e548f6a83a7428cde8e08d7ba8e4, type: 3}
+  - name: Artifact 3
+    description: 3
+    icon: {fileID: 1494767266, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 5871565203560999531, guid: a777ffed7215fe543954670ff9ad52e5, type: 3}
+  - name: Artifact 4
+    description: 4
+    icon: {fileID: 983670443, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 3722814629557979046, guid: f29449c77afcc5740be2b868c12a4e34, type: 3}
+  - name: Artifact 5
+    description: 5
+    icon: {fileID: 1113754263, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 2461550770866577832, guid: bd9c3af03d16abe478add2b68629c089, type: 3}
+  - name: Artifact 6
+    description: 6
+    icon: {fileID: 2123223134, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 7391776183511311308, guid: 002c43e08d28d8e4f84d998dfc50fb23, type: 3}
+  - name: Artifact 7
+    description: 7
+    icon: {fileID: -1425370774, guid: 9e1d73eb38a6b464ca2d80a9243a53ae, type: 3}
+    prefab: {fileID: 5412378042701645987, guid: e248689ce90c6d74bbd63084eda845ae, type: 3}
 --- !u!4 &1416927460
 Transform:
   m_ObjectHideFlags: 0

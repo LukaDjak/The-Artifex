@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -70,10 +71,25 @@ public abstract class Enemy : MonoBehaviour
         player.GetComponent<Player>().aura += (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
         GameManager.gameData.total_kills++;
 
-        ArtifactManager artifactManager = FindObjectOfType<ArtifactManager>();
-        artifactManager.TryDropArtifact(transform.position);
+        TryDropArtifact(transform.position);
 
         Destroy(gameObject);
+    }
+
+    private void TryDropArtifact(Vector2 spawnPosition)
+    {
+        if (UnityEngine.Random.Range(0, 10000) != 0) return;
+
+        List<Artifact> uncollected = GameManager.Instance.allArtifacts.FindAll(artifact =>
+            !GameManager.Instance.collectedArtifacts.Contains(artifact.name));
+
+        if (uncollected.Count > 0)
+        {
+            Artifact randomArtifact = uncollected[UnityEngine.Random.Range(0, uncollected.Count)];
+            Instantiate(randomArtifact.prefab, spawnPosition, Quaternion.identity)
+                .GetComponent<ArtifactPickup>()
+                .Setup(randomArtifact.name);
+        }
     }
 
     protected bool ShouldChase() =>

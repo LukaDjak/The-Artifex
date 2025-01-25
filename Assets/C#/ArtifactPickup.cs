@@ -1,31 +1,34 @@
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
 
 public class ArtifactPickup : MonoBehaviour
 {
-    private Artifact artifact;  // The artifact this visual represents
+    private string artifactName;
     private bool isCollected = false;
+    private bool readyToCollect = false;
 
-    // Called by ArtifactManager to set the artifact data
-    public void Setup(Artifact artifact)
+    // Setup the artifact's name
+    public void Setup(string name)
     {
-        this.artifact = artifact;
-        transform.DOScale(.3f, 1f);
+        artifactName = name;
+        transform.DOScale(0.3f, 1f).OnComplete(() => readyToCollect = true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the player is in range to collect the artifact
-        if (!isCollected && other.CompareTag("Player"))
+        if (!isCollected && other.CompareTag("Player") && readyToCollect)
         {
             isCollected = true;
-            GameManager.Instance.collectedArtifacts.Add(artifact);
-            GameManager.gameData.number_of_artifacts++;
 
-            // Destroy the visual representation of the artifact
+            // Add to collected artifacts
+            if (!GameManager.Instance.collectedArtifacts.Contains(artifactName))
+            {
+                GameManager.Instance.collectedArtifacts.Add(artifactName);
+                GameManager.gameData.number_of_artifacts++;
+            }
+
+            // Destroy the pickup object
             Destroy(gameObject);
-
-            Debug.Log($"Artifact {artifact.name} collected by player!");
         }
     }
 }

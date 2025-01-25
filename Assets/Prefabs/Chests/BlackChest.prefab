@@ -221,35 +221,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boosts:
   - boostName: Max Health
-    boostIcon: {fileID: 21300108, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: 7f0d85cac6c9235498260f6722cd7a7c, type: 3}
     probability: 1
     boostAmount: 0.1
   - boostName: Aura Boost
-    boostIcon: {fileID: 21300252, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: 0bc3d238344ac1642b17caf4f042ffc5, type: 3}
     probability: 1
     boostAmount: 0.1
   - boostName: Speed Boost
-    boostIcon: {fileID: 21300242, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: fac1e873b380c134aba25d36baefabc7, type: 3}
     probability: 1
     boostAmount: 0.1
   - boostName: Damage Boost
-    boostIcon: {fileID: 21300156, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: ab9a34c31ebc89a4b9bf5e8ca598aec2, type: 3}
     probability: 1
     boostAmount: 0.1
   - boostName: Stamina Boost
-    boostIcon: {fileID: 21300156, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: 6d09419cdd8168f41a8258d7df385412, type: 3}
     probability: 1
     boostAmount: 0.1
   - boostName: Heal
-    boostIcon: {fileID: 21300178, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: bdda2f268b8d0284da378221aab94bef, type: 3}
     probability: 1
     boostAmount: 50
   - boostName: Grenade
-    boostIcon: {fileID: 21300154, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: 291f5d4d89ef9d649b0f09616d8fd895, type: 3}
     probability: 1
     boostAmount: 50
   - boostName: Revive Chance
-    boostIcon: {fileID: 21300154, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    boostIcon: {fileID: 21300000, guid: df84ec1da2a55094cb697231dbce6a6a, type: 3}
     probability: 1
     boostAmount: 0.05
   canvas: {fileID: 1030721656437851260}

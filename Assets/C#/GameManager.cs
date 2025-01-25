@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [HideInInspector] public static GameData gameData = new();
     [HideInInspector] public static Settings settings = new();
+    [HideInInspector] public List<string> collectedArtifacts;
 
     [Header("Artifact System")]
-    public List<Artifact> collectedArtifacts = new();
+    public List<Artifact> allArtifacts;
 
     private string currentSceneName;
 
@@ -21,14 +22,11 @@ public class GameManager : MonoBehaviour
 
         LoadScene("Main");
 
-        gameData.total_games_played = PlayerPrefs.GetInt("games", 0);
-        gameData.total_kills = PlayerPrefs.GetInt("kills", 0);
-        gameData.number_of_artifacts = PlayerPrefs.GetInt("artifacts", 0);
-        gameData.total_aura = PlayerPrefs.GetInt("aura", 0);
+        PlayerPrefs.DeleteAll();
 
-        settings.audioVolume = PlayerPrefs.GetFloat("volume", 1);
-        settings.musicVolume = PlayerPrefs.GetFloat("music", 1);
-        settings.muteAudio = PlayerPrefs.GetInt("mute", 0);
+        gameData = SaveAndLoad.LoadGameData();
+        settings = SaveAndLoad.LoadSettings();
+        collectedArtifacts = SaveAndLoad.LoadCollectedArtifacts();
     }
 
     public void LoadScene(string loadSceneName, string unloadSceneName = null)
@@ -38,17 +36,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(loadSceneName, LoadSceneMode.Additive);
         currentSceneName = loadSceneName;
     }
+    public Artifact GetArtifactByName(string artifactName) => allArtifacts.Find(artifact => artifact.name == artifactName);
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetInt("games", gameData.total_games_played);
-        PlayerPrefs.SetInt("kills", gameData.total_kills);
-        PlayerPrefs.SetInt("artifacts", gameData.number_of_artifacts);        
-        PlayerPrefs.SetInt("aura", gameData.total_aura);
-        
-        PlayerPrefs.SetFloat("volume", settings.audioVolume);
-        PlayerPrefs.SetFloat("music", settings.musicVolume);
-        PlayerPrefs.SetInt("mute", settings.muteAudio);
+        SaveAndLoad.SaveGameData(gameData);
+        SaveAndLoad.SaveSettings(settings);
+        SaveAndLoad.SaveCollectedArtifacts(collectedArtifacts);
     }
 }
 
