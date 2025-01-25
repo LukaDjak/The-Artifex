@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SnowChest
+  m_Controller: {fileID: 9100000, guid: d60bae4c0961c0a44b51b4aaa727faee, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 92d9ef93c4572d9439185ceb3c8ec09f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6e4be3a479c03e6408f2e5faa37f35cf, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 94e4585179e79a140ab7250ca5b1380c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b87073b24cd14a94bb777b1ebf5549e2, type: 2}

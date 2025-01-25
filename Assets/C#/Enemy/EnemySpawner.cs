@@ -5,38 +5,48 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawning Settings")]
-    [SerializeField] private int enemiesPerFight = 10; // Number of enemies to spawn per fight phase
-    [SerializeField] private float spawnMinRadius = 10f; // Minimum spawn distance from the player
-    [SerializeField] private float spawnMaxRadius = 20f; // Maximum spawn distance from the player
-    [SerializeField] private float spawnInterval = 1f; // Interval between spawns
-    [SerializeField] private float fightDuration = 30f; // Duration of the fight phase
-    [SerializeField] private float restPeriod = 5f; // Duration of rest periods
+    [SerializeField] private int enemiesPerFight = 10; //number of enemies to spawn during each fight phase
+    [SerializeField] private float spawnMinRadius = 10f; //minimum spawn distance from the player
+    [SerializeField] private float spawnMaxRadius = 20f; //maximum spawn distance from the player
+    [SerializeField] private float spawnInterval = 1f;
+    [SerializeField] private float fightDuration = 30f;
+    [SerializeField] private float restPeriod = 5f;
 
     [System.Serializable]
     public class EnemyType
     {
-        public GameObject enemyPrefab; // Enemy prefab
-        public float spawnProbability; // Probability of spawning this type
+        public GameObject enemyPrefab;
+        public float spawnProbability;
     }
 
-    [Header("Enemy Types")]
-    [SerializeField] private List<EnemyType> enemyTypes = new List<EnemyType>();
+    [System.Serializable]
+    public class ChestType
+    {
+        public GameObject chestPrefab;
+        public float spawnProbability;
+    }
+
+    [Header("Enemies")]
+    [SerializeField] private List<EnemyType> enemyTypes = new();
+
+    [Header("Chests")]
+    [SerializeField] private List<ChestType> chestTypes = new();
 
     [Header("Map Boundaries")]
-    [SerializeField] private Vector2 mapMinBounds; // Bottom-left corner of the map
-    [SerializeField] private Vector2 mapMaxBounds; // Top-right corner of the map
+    [SerializeField] private Vector2 mapMinBounds; //bottom-left corner of the map
+    [SerializeField] private Vector2 mapMaxBounds; //top-right corner of the map
 
-    private Transform player; // Reference to the player
-    private Camera mainCamera; // Reference to the main camera
-    private int enemiesSpawnedInFight = 0; // Count of spawned enemies in the current fight
-    private bool stopSpawning = false; // Stops spawning when player dies
-    private float fightTimer = 0f; // Tracks the remaining fight time
-    private List<GameObject> activeEnemies = new List<GameObject>(); // Tracks active enemies
+    private Transform player;
+    private Camera mainCamera;
+    private int enemiesSpawnedInFight = 0; //count of spawned enemies in the current fight
+    private bool stopSpawning = false;
+    private float fightTimer = 0f;
+    private readonly List<GameObject> activeEnemies = new(); //tracks active enemies
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        mainCamera = Camera.main; // Get the main camera
+        mainCamera = Camera.main;
         StartCoroutine(HandleFightCycle());
     }
 
@@ -44,25 +54,25 @@ public class EnemySpawner : MonoBehaviour
     {
         while (!stopSpawning)
         {
-            // Start fight phase
+            //start fight phase
             fightTimer = fightDuration;
             enemiesSpawnedInFight = 0;
             StartCoroutine(SpawnEnemiesDuringFight());
 
-            // Wait for fight phase to end
+            //wait for fight phase to end
             yield return new WaitForSeconds(fightDuration);
 
-            // Stop spawning and wait until all enemies are defeated
+            //stop spawning and wait until all enemies are defeated
             stopSpawning = true;
             yield return new WaitUntil(() => activeEnemies.Count == 0);
 
-            // Debug chest spawn (rest phase will go here later)
-            Debug.Log("Rest phase started! Chest will spawn here.");
+            //spawn the chest during the rest phase
+            SpawnChest();
 
-            // Rest period
+            //rest period
             yield return new WaitForSeconds(restPeriod);
 
-            // Prepare for the next fight
+            //prepare for the next fight
             stopSpawning = false;
         }
     }
@@ -81,24 +91,19 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyTypes.Count == 0 || player == null) return;
 
-        // Choose enemy based on probabilities
+        //choose enemy based on probabilities
         GameObject enemyToSpawn = ChooseEnemy();
         if (enemyToSpawn == null) return;
 
-        // Calculate a valid spawn position
+        //calculate a valid spawn position
         Vector2 spawnPosition = GetValidSpawnPosition();
         if (spawnPosition == Vector2.zero) return;
 
-        // Instantiate enemy
+        //instantiate enemy - use object pooling in the future
         GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity, transform);
         activeEnemies.Add(newEnemy);
-        // Pooling ti je sljdeci korak! I to NE Ovak
-        // Pool.Create (sjdfls)
-        // static PoolingSytem
-        // public static GameObject Spawn(this GameObject, Vector3 spawnPosition, Quaternon rotation, Transform parent)
-        // enemyPrefab.Spawn
 
-        // Track enemy death
+        //track enemy death
         newEnemy.GetComponent<Enemy>().OnDeath += () => activeEnemies.Remove(newEnemy);
     }
 
@@ -120,28 +125,61 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
+    private void SpawnChest()
+    {
+        //choose chest based on probabilities
+        GameObject chestToSpawn = ChooseChest();
+
+        //calculate a valid spawn position
+        Vector2 chestPosition = GetValidSpawnPosition();
+        if (chestPosition == Vector2.zero)
+            return;
+
+        //spawn chest
+        Instantiate(chestToSpawn, chestPosition, Quaternion.identity);
+        Debug.Log($"Chest spawned: {chestToSpawn.name} at {chestPosition}");
+    }
+
+    private GameObject ChooseChest()
+    {
+        float totalProbability = 0f;
+        foreach (var chest in chestTypes) totalProbability += chest.spawnProbability;
+
+        float randomValue = Random.Range(0, totalProbability);
+        float cumulativeProbability = 0f;
+
+        foreach (var chest in chestTypes)
+        {
+            cumulativeProbability += chest.spawnProbability;
+            if (randomValue <= cumulativeProbability)
+                return chest.chestPrefab;
+        }
+
+        return null;
+    }
+
     private Vector2 GetValidSpawnPosition()
     {
         const int maxAttempts = 100; // Prevent infinite loops
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
-            // Generate a random direction and distance
+            //generate a random direction and distance
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             float distance = Random.Range(spawnMinRadius, spawnMaxRadius);
 
-            // Calculate spawn position around the player
+            //calculate spawn position around the player
             Vector2 spawnPosition = (Vector2)player.position + randomDirection * distance;
 
-            // Check if the position is within the map bounds
+            //check if the position is within the map bounds
             if (!IsWithinMapBounds(spawnPosition)) continue;
 
-            // Check if the position is outside of the camera view
+            //check if the position is outside of the camera view
             if (!IsVisibleToCamera(spawnPosition))
                 return spawnPosition;
         }
 
         Debug.LogWarning("Failed to find a valid spawn position after maximum attempts.");
-        return Vector2.zero; // Fail-safe: Return an invalid position
+        return Vector2.zero; //fail-safe: return an invalid position
     }
 
     private bool IsWithinMapBounds(Vector2 position)
@@ -154,14 +192,9 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
 
-        // Check if the position is within the camera's visible area (0 to 1 in viewport space)
+        //check if the position is within the camera's visible area (0 to 1 in viewport space)
         return viewportPosition.x >= 0 && viewportPosition.x <= 1 &&
                viewportPosition.y >= 0 && viewportPosition.y <= 1 &&
-               viewportPosition.z > 0; // Ensure the position is in front of the camera
-    }
-
-    public void StopSpawning()
-    {
-        stopSpawning = true;
+               viewportPosition.z > 0; //ensure the position is in front of the camera
     }
 }

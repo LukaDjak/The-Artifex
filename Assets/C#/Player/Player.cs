@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxStamina;
     [SerializeField] private GameObject sfxPlayerDeath;
 
-    [HideInInspector] public Multipliers chestMultipliers;
+    [HideInInspector] public Multipliers chestMultipliers = new();
     [HideInInspector] public int health, aura;
     [HideInInspector] public float stamina;
     [HideInInspector] public bool infiniteStamina;
@@ -29,12 +29,9 @@ public class Player : MonoBehaviour
         stamina = maxStamina;
         animator = GetComponent<Animator>();
 
-        healthBar.maxValue = maxHealth;
-        auraBar.maxValue = maxAura;
-        staminaBar.maxValue = maxStamina;
-        staminaBar.gameObject.SetActive(false);
-
+        UpdateMaxValues();
         UpdateBars();
+        staminaBar.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -50,6 +47,13 @@ public class Player : MonoBehaviour
         auraText.text = aura.ToString();
         healthBar.DOValue(health, 0.3f);
         auraBar.DOValue(aura, 0.3f);
+    }
+
+    public void UpdateMaxValues()
+    {
+        healthBar.maxValue = maxHealth;
+        auraBar.maxValue = maxAura;
+        staminaBar.maxValue = maxStamina;
     }
 
     public void ReduceStamina(float amount)
@@ -90,6 +94,9 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Death");
         LevelManager.instance.GameOver();
     }
+
+    public void IncreaseMaxHealth() => maxHealth = (int)(maxHealth * chestMultipliers.maxHealthMultiplier);
+    public void IncreaseMaxStamina() => maxStamina = (int)(maxStamina * chestMultipliers.maxStaminaMultiplier);
 }
 
 public class Multipliers
@@ -98,14 +105,8 @@ public class Multipliers
     public float auraMultiplier = 1f;
     public float speedMultiplier = 1f;
     public float damageMultiplier = 1f;
-    public float staminaDecreaseMultiplier = 1f;
+    public float maxStaminaMultiplier = 1f;
     public float healAmount = 50f;
-    public int grenades = 0;
+    public int grenades = 0; //useless for now
     public float reviveChanceMultiplier = 0f; //useless for now
-    public float maxStaminaDecreseMultiplier = .3f;
-
-    public void IncreaseMaxValues()
-    {
-        //update max_ values and its sliders
-    }
 }

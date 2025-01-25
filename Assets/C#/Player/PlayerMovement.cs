@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDashing && !LevelManager.instance.IsGameOver())
         {
-            float moveSpeed = speed * (isSprinting ? sprintMultiplier : 1f);
+            float moveSpeed = player.chestMultipliers.speedMultiplier * speed * (isSprinting ? sprintMultiplier : 1f);
             rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
         }
     }
