@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Player : MonoBehaviour
 { 
@@ -86,6 +87,13 @@ public class Player : MonoBehaviour
         else
             animator.SetTrigger("Hurt");
         UpdateBars();
+    }
+
+    public void GiveHealth(int amount)
+    {
+        health += amount;
+        if (health > maxHealth)
+            health = maxHealth;
     }
 
     public void Die()

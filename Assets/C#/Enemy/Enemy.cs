@@ -69,6 +69,10 @@ public abstract class Enemy : MonoBehaviour
         OnDeath?.Invoke();
         player.GetComponent<Player>().aura += (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
         GameManager.gameData.total_kills++;
+
+        ArtifactManager artifactManager = FindObjectOfType<ArtifactManager>();
+        artifactManager.TryDropArtifact(transform.position);
+
         Destroy(gameObject);
     }
 

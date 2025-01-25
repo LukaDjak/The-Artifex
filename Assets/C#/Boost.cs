@@ -34,7 +34,7 @@ public class Boost
                 player.stamina += (int)(boostAmount * 100f);
                 break;
             case "Heal":
-                player.health += (int)boostAmount;
+                player.GiveHealth((int)boostAmount);
                 break;
             case "Grenade":
                 player.chestMultipliers.grenades++;

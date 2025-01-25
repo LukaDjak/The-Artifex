@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -69,6 +70,9 @@ public class EnemySpawner : MonoBehaviour
             //spawn the chest during the rest phase
             SpawnChest();
 
+            //give some health to player
+            player.GetComponent<Player>().GiveHealth((int)(10 * player.GetComponent<Player>().chestMultipliers.maxHealthMultiplier));
+
             //rest period
             yield return new WaitForSeconds(restPeriod);
 
@@ -136,7 +140,11 @@ public class EnemySpawner : MonoBehaviour
             return;
 
         //spawn chest
-        Instantiate(chestToSpawn, chestPosition, Quaternion.identity);
+        GameObject chest = Instantiate(chestToSpawn, chestPosition, Quaternion.identity);
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        chest.GetComponent<SpriteRenderer>().flipX = player.position.x > chest.transform.position.x;
+
     }
 
     private GameObject ChooseChest()
@@ -159,27 +167,38 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector2 GetValidSpawnPosition()
     {
-        const int maxAttempts = 100; // Prevent infinite loops
-        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        while (true)
         {
-            //generate a random direction and distance
+            // Generate a random direction and distance
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             float distance = Random.Range(spawnMinRadius, spawnMaxRadius);
 
-            //calculate spawn position around the player
+            // Calculate spawn position around the player
             Vector2 spawnPosition = (Vector2)player.position + randomDirection * distance;
 
-            //check if the position is within the map bounds
+            // Check if the position is within the map bounds
             if (!IsWithinMapBounds(spawnPosition)) continue;
 
-            //check if the position is outside of the camera view
-            if (!IsVisibleToCamera(spawnPosition))
-                return spawnPosition;
-        }
+            // Check if the position is outside of the camera view
+            if (!IsVisibleToCamera(spawnPosition)) continue;
 
-        Debug.LogWarning("Failed to find a valid spawn position after maximum attempts.");
-        return Vector2.zero; //fail-safe: return an invalid position
+            // Check for tilemap collision or overlap with obstacles
+            if (IsPositionObstructed(spawnPosition)) continue;
+
+            // Valid spawn position
+            return spawnPosition;
+        }
     }
+
+    private bool IsPositionObstructed(Vector2 position)
+    {
+        int groundLayer = LayerMask.GetMask("Ground"); // Replace with your obstacle layer name
+        Collider2D collider = Physics2D.OverlapCircle(position, 0.5f, groundLayer); // Adjust radius
+        if (collider != null)
+            return true;
+        return false;
+    }
+
 
     private bool IsWithinMapBounds(Vector2 position)
     {
