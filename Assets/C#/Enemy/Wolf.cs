@@ -4,12 +4,13 @@ using UnityEngine;
 public class Wolf : Enemy
 {
     [Header("Wolf Attributes")]
-    [SerializeField] private float runSpeed = 6f;
+    [SerializeField] private float speed = 6f;
     [SerializeField] private float runDuration = 5f;
     [SerializeField] private float idleTime = 15f;
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float obstacleDetectionDistance = 1f;
+    [SerializeField] private AudioClip[] deathClips;
 
     private Animator animator;
     private bool isRunning;
@@ -20,7 +21,6 @@ public class Wolf : Enemy
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
         StartCoroutine(IdleBehavior());
     }
 
@@ -54,7 +54,7 @@ public class Wolf : Enemy
             if (IsObstacleInPath() && !isKnockedBack)
                 JumpOverObstacle();
             else
-                rb.velocity = new Vector2(runSpeed * (transform.localScale.x > 0 ? 1 : -1), rb.velocity.y);
+                rb.velocity = new Vector2(speed * (transform.localScale.x > 0 ? 1 : -1), rb.velocity.y);
         }
         else if (!isChasing && !isRunning)
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -76,13 +76,15 @@ public class Wolf : Enemy
 
     private void ChasePlayer()
     {
-        float direction = player.transform.position.x > transform.position.x ? 1 : -1;
+        Vector2 direction = (player.transform.position - transform.position).normalized;
 
-        if (IsObstacleInPath() && !isKnockedBack)
+        if (IsObstacleInPath())
             JumpOverObstacle();
         else
-            rb.velocity = new Vector2(direction * runSpeed, rb.velocity.y);
-        Flip(direction);
+        {
+            rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
+            Flip(direction.x);
+        }
     }
 
     private void Flip(float direction)
@@ -115,5 +117,11 @@ public class Wolf : Enemy
 
         if (Vector2.Distance(transform.position, player.transform.position) <= attackRange)
             player.GetComponent<Player>().TakeDamage(damage);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        AudioManager.instance.PlaySFX(deathClips[Random.Range(0, deathClips.Length)]);
     }
 }

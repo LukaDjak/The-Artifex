@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6171623749090482295}
   - component: {fileID: 977384080648616915}
   - component: {fileID: 9076403633922917997}
+  - component: {fileID: -120145864565267069}
   - component: {fileID: 3024240221213787322}
   - component: {fileID: 1705576590599420265}
   m_Layer: 8
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4276933586395563017}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5c61b7d6112cdba4c87e777c64a7dd5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -132,6 +133,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8796798, y: 0.71910536}
   m_EdgeRadius: 0
+--- !u!50 &-120145864565267069
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276933586395563017}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 50
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!95 &3024240221213787322
 Animator:
   serializedVersion: 5
@@ -169,7 +197,6 @@ MonoBehaviour:
   maxHealth: 125
   minAura: 7
   maxAura: 15
-  enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
   enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
@@ -180,8 +207,9 @@ MonoBehaviour:
   currentHealth: 0
   patrolSpeed: 2
   chaseSpeed: 4
-  patrolRange: 1
   minFlightTime: 2
   maxFlightTime: 5
   secondaryAttackChance: 20
-  spawnAndDeathClip: {fileID: 8300000, guid: 5e6559e0b426fbc44ba2f948648aaaf6, type: 3}
+  primaryAttackClip: {fileID: 8300000, guid: 38038626cf3a6de41ac82b1a2be53fa5, type: 3}
+  secondaryAttackClip: {fileID: 8300000, guid: f46628938b9967e4b82a5cac0b519d87, type: 3}
+  deathClip: {fileID: 8300000, guid: 5e6559e0b426fbc44ba2f948648aaaf6, type: 3}

@@ -11405,9 +11405,9 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 8050292824361723380, guid: a3f139024bc13044a8cd687012034f55, type: 3}
     spawnProbability: 50
   - enemyPrefab: {fileID: 7753236715370362122, guid: 707d230508d0a0a4f9d75dc3a401bfc4, type: 3}
-    spawnProbability: 5
+    spawnProbability: 100
   - enemyPrefab: {fileID: 3288112947413304929, guid: bf7c7ce1e3b7fa84196e588f6529158e, type: 3}
-    spawnProbability: 90.1
+    spawnProbability: 20
   chestTypes:
   - chestPrefab: {fileID: 194281574112108735, guid: d1c12e0dd3f996241bcfd7218a68bafa, type: 3}
     spawnProbability: 75

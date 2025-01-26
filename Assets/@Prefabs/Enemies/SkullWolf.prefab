@@ -184,9 +184,7 @@ MonoBehaviour:
   attackRange: 1.5
   attackCooldown: 1.5
   currentHealth: 0
-  knockbackDuration: 0.3
-  knockbackDrag: 5
-  runSpeed: 6
+  speed: 6
   runDuration: 5
   idleTime: 15
   jumpForce: 7
@@ -194,6 +192,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   obstacleDetectionDistance: 1
+  spawnClips:
+  - {fileID: 8300000, guid: 9f4fcc26aed9b734c84a0bc00352c09b, type: 3}
+  - {fileID: 8300000, guid: be6e7d6a564d51c458a2b254b805eb07, type: 3}
 --- !u!95 &2736497953164017552
 Animator:
   serializedVersion: 5

@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         AudioManager.instance.PlaySFX(playerHurt);
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, GetComponent<Rigidbody2D>().velocity.y, 0);
         animator.SetTrigger("Death");
         if (Random.Range(0, 100) <= GameManager.gameData.chance_to_respawn + chestMultipliers.reviveChanceMultiplier * 100)
             Invoke(nameof(Recover), 2f);

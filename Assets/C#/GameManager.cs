@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public static GameData gameData = new();
     [HideInInspector] public static Settings settings = new();
     [HideInInspector] public List<string> collectedArtifacts;
+    public Camera loaderCamera; // Assign this in the inspector (camera in the loader scene)
 
     public List<Artifact> artifacts;
 
@@ -27,9 +28,19 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string loadSceneName, string unloadSceneName = null)
     {
-        if (unloadSceneName != null || currentSceneName != null)
+        if (!string.IsNullOrEmpty(unloadSceneName) || !string.IsNullOrEmpty(currentSceneName))
+        {
+            loaderCamera.gameObject.SetActive(true);
             SceneManager.UnloadSceneAsync(unloadSceneName ?? currentSceneName);
-        SceneManager.LoadSceneAsync(loadSceneName, LoadSceneMode.Additive);
+        }
+
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(loadSceneName, LoadSceneMode.Additive);
+
+        loadOperation.completed += (operation) =>
+        {
+            if (loaderCamera != null)
+                loaderCamera.gameObject.SetActive(false);
+        };
         currentSceneName = loadSceneName;
     }
 

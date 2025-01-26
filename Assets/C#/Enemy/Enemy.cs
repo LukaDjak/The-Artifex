@@ -79,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
         Invoke(nameof(ResetKnockback), .2f);
     }
 
-    private void ResetKnockback() => isKnockedBack = false;
+    protected virtual void ResetKnockback() => isKnockedBack = false;
 
     protected virtual void Die()
     {
@@ -87,6 +87,7 @@ public abstract class Enemy : MonoBehaviour
         OnDeath?.Invoke();
         int auraToGive = (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
         player.GetComponent<Player>().aura += auraToGive;
+        player.GetComponent<Player>().UpdateBars();
         GameManager.gameData.total_aura += auraToGive;
         GameManager.gameData.total_kills++;
 

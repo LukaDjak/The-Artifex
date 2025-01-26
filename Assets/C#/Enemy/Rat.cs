@@ -14,7 +14,6 @@ public class Rat : Enemy
     [SerializeField] private AudioClip deathClip;
 
     private float stateTimer; //timer for state transitions
-    private float attackCooldownTimer;
     private Vector2 wanderDirection;
 
     private bool isWandering;
@@ -27,7 +26,6 @@ public class Rat : Enemy
         base.Start();
         stateTimer = idleDuration;
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
     }
 
     protected override void Update()
@@ -35,8 +33,6 @@ public class Rat : Enemy
         base.Update();
 
         if (currentHealth <= 0 || isKnockedBack) return;
-
-        attackCooldownTimer -= Time.deltaTime;
 
         if (ShouldChase())
         {
@@ -54,6 +50,10 @@ public class Rat : Enemy
                 ResetToIdle();
             HandleWandering();
         }
+
+        //attack behavior
+        if (!isAttacking && ShouldAttack())
+            Attack();
     }
 
     private void HandleWandering()
@@ -83,9 +83,15 @@ public class Rat : Enemy
             if (IsObstacleInPath())
                 JumpOverObstacle();
             else
-                transform.Translate(speed * Time.deltaTime * wanderDirection);
+                rb.velocity = new Vector2(wanderDirection.x * speed, rb.velocity.y);
+        }
+        else
+        {
+            // Stop movement when idle
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
+
 
     private void ChasePlayer()
     {
@@ -119,17 +125,11 @@ public class Rat : Enemy
         animator.SetBool("IsMoving", false);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && attackCooldownTimer <= 0f)
-        {
-            Attack();
-            attackCooldownTimer = attackCooldown;
-        }
-    }
-
     public override void Attack()
     {
+        isAttacking = true;
+        attackTimer = attackCooldown;
+
         player.GetComponent<Player>().TakeDamage(damage);
         AudioManager.instance.PlaySFX(enemyAttack);
         AudioManager.instance.PlaySFX(attackClip);

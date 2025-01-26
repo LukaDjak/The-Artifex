@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private Player player;
 
     [HideInInspector] public bool dashActive = false;
+
+    private readonly List<Enemy> damagedEnemies = new();
 
     private void Start()
     {
@@ -124,32 +127,42 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2((facingRight ? 1 : -1) * dashSpeed, rb.velocity.y);
         currentDashTime -= Time.deltaTime;
-        if (currentDashTime <= 0) StopDash();
+
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position + new Vector3(0, 0.5f, 0), 1.5f, LayerMask.GetMask("Enemy"));
+
+        //loop through the enemies and apply damage only if they haven't been hit during this dash
+        foreach (var enemyCollider in enemiesHit)
+        {
+            if (enemyCollider.CompareTag("Enemy"))
+            {
+                Enemy enemy = enemyCollider.GetComponent<Enemy>();
+                if (!damagedEnemies.Contains(enemy)) //check if this enemy has already been damaged
+                {
+                    damagedEnemies.Add(enemy);
+
+                    //apply damage and knockback
+                    enemy.TakeDamage(15);
+                    Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+                    knockbackDirection.y = Mathf.Abs(knockbackDirection.y);
+                    enemy.ApplyKnockback(knockbackDirection, 10f);
+                }
+            }
+        }
+
+        if (currentDashTime <= 0)
+            StopDash();
     }
 
     private void StopDash()
     {
         isDashing = false;
         rb.velocity = new Vector2(0, rb.velocity.y);
+        damagedEnemies.Clear();
     }
 
     private void Flip()
     {
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-    }
-
-    //deal some damage to enemies when dashing into them
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (isDashing && collision.gameObject.TryGetComponent(out Enemy e))
-        {
-            e.TakeDamage(10);
-            Vector2 knockbackDirection = (e.transform.position - transform.position).normalized;
-            knockbackDirection.y = Mathf.Abs(knockbackDirection.y);
-
-            float knockbackForce = 20f;
-            e.ApplyKnockback(knockbackDirection, knockbackForce);
-        }
     }
 }
