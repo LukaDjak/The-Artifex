@@ -21,7 +21,6 @@ public class Rat : Enemy
     private bool isChasing;
 
     private Animator animator;
-    private Rigidbody2D rb;
 
     protected override void Start()
     {
@@ -35,7 +34,7 @@ public class Rat : Enemy
     {
         base.Update();
 
-        if (currentHealth <= 0) return;
+        if (currentHealth <= 0 || isKnockedBack) return;
 
         attackCooldownTimer -= Time.deltaTime;
 

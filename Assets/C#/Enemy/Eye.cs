@@ -14,6 +14,8 @@ public class Eye : Enemy
 
     [Space(15f)]
     [SerializeField] private AudioClip spawnAndDeathClip;
+    [SerializeField] private AudioClip primaryAttackClip;
+    [SerializeField] private AudioClip secondaryAttackClip;
 
     private float patrolDirectionTimer = 0f;
 
@@ -31,7 +33,7 @@ public class Eye : Enemy
     protected override void Update()
     {
         base.Update();
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 || isKnockedBack)
             return;
 
         //handle flying and patrol behavior
@@ -44,7 +46,7 @@ public class Eye : Enemy
         if (ShouldAttack() && !isAttacking && attackTimer <= 0)
             Attack();
 
-        // Update the attack timer
+        //attack timer
         if (isAttacking)
         {
             attackTimer -= Time.deltaTime;
@@ -53,58 +55,46 @@ public class Eye : Enemy
         }
     }
 
+    //move along X-axis with some variation on Y-axis for the flight time
     private void Patrol()
     {
-        // Update the timer
         patrolDirectionTimer -= Time.deltaTime;
 
-        // Change patrol direction every 2-3 seconds
         if (patrolDirectionTimer <= 0f)
         {
-            // Reverse patrol direction
             patrolRange = -patrolRange;
-
-            // Reset the timer with a random interval between 2 and 5 seconds
             patrolDirectionTimer = Random.Range(minFlightTime, maxFlightTime);
         }
 
-        // Move along the X axis only
         if (Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(patrolPoint.x, 0)) > 0.2f)
         {
-            // Determine the direction of movement and flip accordingly
             float direction = Mathf.Sign(patrolPoint.x - transform.position.x);
             Flip(direction);
-
-            // Move the enemy on the X axis only
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(patrolPoint.x, transform.position.y), patrolSpeed * Time.deltaTime);
         }
         else
-        {
-            // When the patrol point is reached, set a new patrol point in the opposite direction
             patrolPoint = new Vector2(transform.position.x + patrolRange, transform.position.y);
-        }
 
-        // Simulate natural flying height variation (Y-axis)
         float yVariation = Mathf.Sin(Time.time * 2f) * 0.5f;
         transform.position = new Vector3(transform.position.x, yVariation, transform.position.z);
     }
-
 
     private void ChasePlayer()
     {
         if (player != null)
         {
-            // Determine the direction of movement and flip accordingly
             float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
             Flip(direction);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
+            //stop moving a few units before the player
+            if (distanceToPlayer > attackRange - .5f)
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
         }
     }
 
     private void Flip(float direction)
     {
-        // Flip the sprite by changing the x scale to negative or positive based on movement direction
         Vector3 scale = transform.localScale;
         if (direction < 0 && scale.x > 0 || direction > 0 && scale.x < 0)
         {
@@ -119,26 +109,22 @@ public class Eye : Enemy
         attackTimer = attackCooldown;
         AudioManager.instance.PlaySFX(enemyAttack);
 
-
         //decide attack type (primary or secondary)
         if (Random.Range(0, 100) < secondaryAttackChance)
+        {
             animator.SetTrigger("SecondaryAttack");
+            AudioManager.instance.PlaySFX(secondaryAttackClip);
+        }
         else
+        {
             animator.SetTrigger("PrimaryAttack");
+            AudioManager.instance.PlaySFX(primaryAttackClip);
+        }
     }
 
-    public void PrimaryAttack()
-    {
-        //perform primary melee attack
-        player.GetComponent<Player>().TakeDamage(damage);
-        
-    }
+    public void PrimaryAttack() => player.GetComponent<Player>().TakeDamage(damage); //called on animation event frame
 
-    public void SecondaryAttack()
-    {
-        //perform secondary melee attack with a different effect or animation
-        player.GetComponent<Player>().TakeDamage(damage * 2); // Example of stronger damage
-    }
+    public void SecondaryAttack() => player.GetComponent<Player>().TakeDamage(damage * 2); //called on animation event frame
 
     protected override void Die()
     {

@@ -142,7 +142,14 @@ public class PlayerMovement : MonoBehaviour
     //deal some damage to enemies when dashing into them
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isDashing && collision.gameObject.TryGetComponent<Enemy>(out Enemy e))
+        if (isDashing && collision.gameObject.TryGetComponent(out Enemy e))
+        {
             e.TakeDamage(10);
+            Vector2 knockbackDirection = (e.transform.position - transform.position).normalized;
+            knockbackDirection.y = Mathf.Abs(knockbackDirection.y);
+
+            float knockbackForce = 20f;
+            e.ApplyKnockback(knockbackDirection, knockbackForce);
+        }
     }
 }

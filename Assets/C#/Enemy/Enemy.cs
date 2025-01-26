@@ -32,19 +32,22 @@ public abstract class Enemy : MonoBehaviour
     private SpriteRenderer sr;
     private Material originalMaterial;
     private Coroutine flashCoroutine;
-
+    protected bool isKnockedBack = false;
+    protected Rigidbody2D rb;
 
     protected virtual void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
 
+        rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         originalMaterial = sr.material;
     }
 
     protected virtual void Update()
     {
+        if (isKnockedBack) return;
         //attack cooldown
         if (isAttacking)
         {
@@ -64,6 +67,19 @@ public abstract class Enemy : MonoBehaviour
         else
             Die();
     }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        if (isKnockedBack) return; //prevent multiple knockbacks at once
+        isKnockedBack = true;
+
+        rb.velocity = Vector2.zero;
+        rb.AddForce(force * rb.mass * direction, ForceMode2D.Impulse);
+
+        Invoke(nameof(ResetKnockback), .2f);
+    }
+
+    private void ResetKnockback() => isKnockedBack = false;
 
     protected virtual void Die()
     {
@@ -111,11 +127,8 @@ public abstract class Enemy : MonoBehaviour
     private IEnumerator FlashCoroutine()
     {
         sr.material = flashMaterial;
-
         yield return new WaitForSeconds(flashDuration);
-
         sr.material = originalMaterial;
-
         flashCoroutine = null;
     }
 
@@ -132,6 +145,6 @@ public abstract class Enemy : MonoBehaviour
 /* juicing up enemies
 - hurt flash - done
 - blood particles
-- little knockback
-- audio effect
+- little knockback - done
+- audio effect - done
 */

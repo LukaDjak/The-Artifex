@@ -10,7 +10,6 @@ public class Slime : Enemy
     private float jumpCooldownTimer;
     private float attackCooldownTimer;
 
-    private Rigidbody2D rb;
     private Animator animator;
 
     private bool smallerSlime = false;
@@ -18,7 +17,6 @@ public class Slime : Enemy
     protected override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         jumpCooldownTimer = attackCooldown; //initialize cooldown timers
@@ -27,6 +25,7 @@ public class Slime : Enemy
 
     protected override void Update()
     {
+        if(isKnockedBack) return;
         //update timers
         attackCooldownTimer -= Time.deltaTime;
         jumpCooldownTimer -= Time.deltaTime;

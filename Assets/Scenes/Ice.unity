@@ -21044,6 +21044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Infinite Stamina
   auraCost: 65
+  activationSound: {fileID: 0}
+  deactivationSound: {fileID: 0}
   duration: 5
 --- !u!114 &1470295352
 MonoBehaviour:
@@ -21059,6 +21061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Jump Boost
   auraCost: 50
+  activationSound: {fileID: 0}
+  deactivationSound: {fileID: 0}
   duration: 10
   jumpBoostMultiplier: 1.5
 --- !u!4 &1470295353
@@ -21090,6 +21094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Dash
   auraCost: 50
+  activationSound: {fileID: 0}
+  deactivationSound: {fileID: 0}
   duration: 10
 --- !u!1 &1475561720
 GameObject:
@@ -51268,6 +51274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce74cad1b165744fa1145eb7a37a222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUIActive: 0
   GameOverUI: {fileID: 1529882220}
   clickClips: []
 --- !u!4 &1822693872
