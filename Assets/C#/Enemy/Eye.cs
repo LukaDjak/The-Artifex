@@ -27,8 +27,10 @@ public class Eye : Enemy
 
     protected override void Update()
     {
+        base.Update();
+
         //skip update if dead or knockedback
-        if (currentHealth <= 0 || isKnockedBack) return;
+        if (currentHealth <= 0 || isKnockedBack || isDead) return;
 
         //attack logic
         if (attackTimer <= 0f && !isAttacking)
@@ -42,14 +44,6 @@ public class Eye : Enemy
             ChasePlayer();
         else
             Patrol();
-
-        //attack cooldown timer
-        if (isAttacking)
-        {
-            attackTimer -= Time.deltaTime;
-            if (attackTimer <= 0f)
-                isAttacking = false;
-        }
     }
 
     //move along X-axis with some variation on Y-axis for the flight time
@@ -159,8 +153,11 @@ public class Eye : Enemy
 
     protected override void Die()
     {
-        animator.SetTrigger("Death");
-        AudioManager.instance.PlaySFX(deathClip);
+        if(isDead) return;
         base.Die();
+        animator.SetTrigger("Death");
+        rb.gravityScale = 1f;
+        AudioManager.instance.PlaySFX(deathClip);
+        Destroy(gameObject, 5f);
     }
 }

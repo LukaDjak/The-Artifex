@@ -138,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 Enemy enemy = enemyCollider.GetComponent<Enemy>();
                 if (!damagedEnemies.Contains(enemy)) //check if this enemy has already been damaged
                 {
+                    if(enemy.isDead) return;
                     damagedEnemies.Add(enemy);
 
                     //apply damage and knockback

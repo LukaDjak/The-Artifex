@@ -35,16 +35,24 @@ public class PlayerCombat : MonoBehaviour
         //detect enemies in attack range using a Physics2D overlap
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position + new Vector3(0, 0.5f, 0), attackRange, LayerMask.GetMask("Enemy"));
 
-        if(enemiesHit.Length > 0 )
-            AudioManager.instance.PlaySFX(enemyHurt);
+        bool playedHurtSound = false;
 
         //loop through the enemies and apply damage if hit
-        foreach (var enemyCollider in enemiesHit)
+        for (int i = 0; i < enemiesHit.Length; i++)
         {
-            if (enemyCollider.CompareTag("Enemy"))
+            if (enemiesHit[i].TryGetComponent(out Enemy e))
             {
-                enemyCollider.GetComponent<Enemy>().TakeDamage(damage);
-                ApplyKnockback(enemyCollider);
+                if (e.isDead)
+                    continue;  //skip dead enemies
+
+                e.TakeDamage(damage); 
+                ApplyKnockback(enemiesHit[i]);
+
+                if (!playedHurtSound)
+                {
+                    AudioManager.instance.PlaySFX(enemyHurt);
+                    playedHurtSound = true;
+                }
             }
         }
     }

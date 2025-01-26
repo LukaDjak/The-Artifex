@@ -24,6 +24,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float attackCooldown = 1.5f;
 
     [HideInInspector] public int currentHealth;
+    [HideInInspector] public bool isDead = false;
 
     protected GameObject player;
     protected bool isAttacking;
@@ -34,6 +35,7 @@ public abstract class Enemy : MonoBehaviour
     private Coroutine flashCoroutine;
     protected bool isKnockedBack = false;
     protected Rigidbody2D rb;
+
 
     protected virtual void Start()
     {
@@ -47,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (isKnockedBack) return;
+        if (isKnockedBack || isDead) return;
         //attack cooldown
         if (isAttacking)
         {
@@ -83,8 +85,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        if(isDead) return;
+
         //some kind of death effect or animation
         OnDeath?.Invoke();
+        isDead = true;
         int auraToGive = (int)(UnityEngine.Random.Range(minAura, maxAura) * player.GetComponent<Player>().chestMultipliers.auraMultiplier);
         player.GetComponent<Player>().aura += auraToGive;
         player.GetComponent<Player>().UpdateBars();
@@ -92,8 +97,6 @@ public abstract class Enemy : MonoBehaviour
         GameManager.gameData.total_kills++;
 
         TryDropArtifact(transform.position);
-
-        Destroy(gameObject);
     }
 
     private void TryDropArtifact(Vector2 spawnPosition)
@@ -148,4 +151,12 @@ public abstract class Enemy : MonoBehaviour
 - blood particles
 - little knockback - done
 - audio effect - done
+*/
+
+/*
+death animation:
+- wolf
+- eye
+- bat
+- slime
 */

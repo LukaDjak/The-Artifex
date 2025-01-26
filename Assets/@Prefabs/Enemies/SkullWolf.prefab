@@ -192,7 +192,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   obstacleDetectionDistance: 1
-  spawnClips:
+  deathClips:
   - {fileID: 8300000, guid: 9f4fcc26aed9b734c84a0bc00352c09b, type: 3}
   - {fileID: 8300000, guid: be6e7d6a564d51c458a2b254b805eb07, type: 3}
 --- !u!95 &2736497953164017552

@@ -25,7 +25,7 @@ public class Slime : Enemy
     {
         base.Update();
 
-        if(isKnockedBack) return;
+        if(isKnockedBack || isDead) return;
         jumpCooldownTimer -= Time.deltaTime;
 
         //handle jumping
@@ -64,6 +64,8 @@ public class Slime : Enemy
 
     protected override void Die()
     {
+        if(isDead) return;
+
         animator.SetTrigger("Death");
         AudioManager.instance.PlaySFX(deathClip);
 
@@ -84,8 +86,10 @@ public class Slime : Enemy
                 slimeComponent.attackCooldown *= 1.5f;
                 slimeComponent.maxHealth /= 2;
                 slimeComponent.smallerSlime = true;
+                slimeComponent.isDead = false;
             }
         }
         base.Die();
+        Destroy(gameObject, 2f);
     }
 }

@@ -140,6 +140,7 @@ public class Rat : Enemy
     {
         base.Die();
         AudioManager.instance.PlaySFX(deathClip);
+        Destroy(gameObject);
     }
 
     private void Flip(float direction)

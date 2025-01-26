@@ -27,7 +27,7 @@ public class Wolf : Enemy
     protected override void Update()
     {
         base.Update();
-        if (currentHealth <= 0 || isKnockedBack) return;
+        if (currentHealth <= 0 || isKnockedBack || isDead) return;
 
         //chase behavior
         if (ShouldChase())
@@ -48,7 +48,7 @@ public class Wolf : Enemy
 
     private void FixedUpdate()
     {
-        if(isKnockedBack) return;
+        if(isKnockedBack || isDead) return;
         if (!isChasing && isRunning)
         {
             if (IsObstacleInPath() && !isKnockedBack)
@@ -121,7 +121,11 @@ public class Wolf : Enemy
 
     protected override void Die()
     {
+        if(isDead) return;
         base.Die();
+        animator.SetTrigger("Death");
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
         AudioManager.instance.PlaySFX(deathClips[Random.Range(0, deathClips.Length)]);
+        Destroy(gameObject, 5f);
     }
 }
