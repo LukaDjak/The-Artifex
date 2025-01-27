@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GroundEnemy : Enemy
 {
@@ -106,8 +107,9 @@ public class GroundEnemy : Enemy
     private bool IsObstacleInPath()
     {
         //check for obstacles in front of the enemy using a raycast
-        Vector2 origin = transform.position - new Vector3(0, -.3f, 0);
+        Vector2 origin = transform.position - new Vector3(0, .3f, 0);
         Vector2 direction = new(transform.localScale.x, 0); //forward direction based on facing
+        Debug.DrawRay(origin, direction, Color.red);
         return Physics2D.Raycast(origin, direction, obstacleDetectionDistance, groundLayer);
     }
 
@@ -142,8 +144,8 @@ public class GroundEnemy : Enemy
         AudioManager.instance.PlaySFX(deathClips[Random.Range(0, deathClips.Length)]);
         if (HasParameter(animator, "Death"))
         {
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
             animator.SetTrigger("Death");
+            rb.velocity = Vector2.zero;
             Destroy(gameObject, 5f);
         }
         else
