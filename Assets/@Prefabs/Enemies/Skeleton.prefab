@@ -215,6 +215,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   obstacleDetectionDistance: 1
-  attackClip: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
+  attackClip: {fileID: 8300000, guid: b89d967d60d6cf847a4099fa1c3de3e7, type: 3}
   deathClips:
-  - {fileID: 8300000, guid: 43a8c0ce5dcd6084d87bdfda98890015, type: 3}
+  - {fileID: 8300000, guid: 7c5fd70a33bedae4d9a9b74b11e3e72c, type: 3}
