@@ -11256,15 +11256,15 @@ MonoBehaviour:
   restPeriod: 5
   enemyTypes:
   - enemyPrefab: {fileID: 8691590660644402568, guid: df8e44cf5380fa14fbaaeafc2ecc11a7, type: 3}
-    spawnProbability: 20
+    spawnProbability: 15
   - enemyPrefab: {fileID: 8361134740755505866, guid: df8207b5b5170d04986fdcaf21616185, type: 3}
-    spawnProbability: 20
+    spawnProbability: 15
   - enemyPrefab: {fileID: 8050292824361723380, guid: a3f139024bc13044a8cd687012034f55, type: 3}
-    spawnProbability: 50
+    spawnProbability: 40
   - enemyPrefab: {fileID: 7753236715370362122, guid: 707d230508d0a0a4f9d75dc3a401bfc4, type: 3}
+    spawnProbability: 5
+  - enemyPrefab: {fileID: 5190524746494378481, guid: 0fc61a1e74d4a7d44a175e79d94a27d3, type: 3}
     spawnProbability: 100
-  - enemyPrefab: {fileID: 3288112947413304929, guid: bf7c7ce1e3b7fa84196e588f6529158e, type: 3}
-    spawnProbability: 20
   chestTypes:
   - chestPrefab: {fileID: 194281574112108735, guid: d1c12e0dd3f996241bcfd7218a68bafa, type: 3}
     spawnProbability: 75
@@ -49474,7 +49474,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -50359,10 +50359,10 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -640578479, guid: 705ea5e4e94eb184d8976f1a82a21bcd, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -640578479, guid: 705ea5e4e94eb184d8976f1a82a21bcd, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1045442548, guid: 705ea5e4e94eb184d8976f1a82a21bcd, type: 3}
   - m_RefCount: 20
@@ -55935,7 +55935,6 @@ SceneRoots:
   - {fileID: 1142076049}
   - {fileID: 1529882224}
   - {fileID: 1470295353}
-  - {fileID: 1532112069}
   - {fileID: 1822693872}
   - {fileID: 828639650}
   - {fileID: 1974357052}
@@ -55943,3 +55942,4 @@ SceneRoots:
   - {fileID: 1177128260}
   - {fileID: 1964378903}
   - {fileID: 455817423}
+  - {fileID: 1532112069}

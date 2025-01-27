@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Enemy Attributes")]
-    [SerializeField] private string enemyName;
+    [SerializeField] protected string enemyName;
     [SerializeField] protected int maxHealth = 100;
     [SerializeField] private int minAura;
     [SerializeField] private int maxAura;

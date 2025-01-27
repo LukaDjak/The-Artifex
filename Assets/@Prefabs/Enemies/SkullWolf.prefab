@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9006928557878216189}
   - component: {fileID: 6536530416512107081}
   - component: {fileID: 7021199028490959761}
-  - component: {fileID: 1099151369142574131}
+  - component: {fileID: -5417383403745558443}
   - component: {fileID: 2736497953164017552}
   m_Layer: 8
   m_Name: SkullWolf
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.72, y: 0.15}
   m_EdgeRadius: 0.2
---- !u!114 &1099151369142574131
+--- !u!114 &-5417383403745558443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3288112947413304929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30997e04583383944b4153ea1de1d1d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f205c8ef736c2f44997fd3932e30f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Skull Wolf
@@ -184,14 +184,17 @@ MonoBehaviour:
   attackRange: 1.5
   attackCooldown: 1.5
   currentHealth: 0
+  isDead: 0
+  idleDuration: 15
+  wanderDuration: 5
   speed: 6
-  runDuration: 5
-  idleTime: 15
+  chaseSpeedMultiplier: 1
   jumpForce: 7
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   obstacleDetectionDistance: 1
+  attackClip: {fileID: 0}
   deathClips:
   - {fileID: 8300000, guid: 9f4fcc26aed9b734c84a0bc00352c09b, type: 3}
   - {fileID: 8300000, guid: be6e7d6a564d51c458a2b254b805eb07, type: 3}
