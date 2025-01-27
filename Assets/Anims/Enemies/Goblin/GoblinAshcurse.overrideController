@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GoblinAshcurse
+  m_Controller: {fileID: 9100000, guid: 59f79572e58962c4a9d2604efc03c778, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b9fa17267c1f6fb4f8d497f235305fd0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3980f990c0cac5e429f14f0b860ec112, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2ce76b79142e7e64d9bd86b06632651c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 352c18f662cfcd748adbb09a9e29c9e5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4f13342cb6222614d9e478fddaac8600, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a8df20f4d9c197a42b8584fb0957eb6a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5a0457145612e8841bea4063a458dbba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5571a55507e1b3d4b96024f235a5186e, type: 2}
