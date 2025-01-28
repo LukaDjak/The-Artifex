@@ -92,6 +92,7 @@ MonoBehaviour:
   maxAura: 100
   maxStamina: 100
   playerHurt: {fileID: 8300000, guid: 1caf08385447db1458a1d7897cf21da7, type: 3}
+  bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   health: 0
   aura: 0
   stamina: 0
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 12
-  sprintMultiplier: 2
+  sprintMultiplier: 2.5
   dashSpeed: 30
   dashTime: 0.25
   groundLayer:
@@ -139,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   attackRange: 0.69
-  attackCooldown: 0.4
+  attackCooldown: 0.33
   attackSound: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
 --- !u!95 &3249964185786378894

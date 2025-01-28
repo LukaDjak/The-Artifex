@@ -58,13 +58,13 @@ public class EnemySpawner : MonoBehaviour
             //start fight phase
             fightTimer = fightDuration;
             enemiesSpawnedInFight = 0;
+            stopSpawning = false;
             StartCoroutine(SpawnEnemiesDuringFight());
 
-            //wait for fight phase to end
-            yield return new WaitForSeconds(fightDuration);
+            //wait for the fight phase to end
+            yield return new WaitUntil(() => enemiesSpawnedInFight >= enemiesPerFight);
 
-            //stop spawning and wait until all enemies are defeated
-            stopSpawning = true;
+            //once fight phase ends, wait for enemies to be defeated
             yield return new WaitUntil(() => activeEnemies.Count == 0);
 
             //spawn the chest during the rest phase
@@ -75,15 +75,12 @@ public class EnemySpawner : MonoBehaviour
 
             //rest period
             yield return new WaitForSeconds(restPeriod);
-
-            //prepare for the next fight
-            stopSpawning = false;
         }
     }
 
     private IEnumerator SpawnEnemiesDuringFight()
     {
-        while (fightTimer > 0 && enemiesSpawnedInFight < enemiesPerFight && !stopSpawning)
+        while (enemiesSpawnedInFight < enemiesPerFight && !stopSpawning)
         {
             SpawnEnemy();
             enemiesSpawnedInFight++;

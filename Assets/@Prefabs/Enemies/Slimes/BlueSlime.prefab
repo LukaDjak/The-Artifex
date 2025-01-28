@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 6341559315827417781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.56, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -279,14 +279,14 @@ MonoBehaviour:
   enemyName: Blue Slime
   maxHealth: 35
   minAura: 1
-  maxAura: 7
+  maxAura: 6
   enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
-  damage: 4
+  damage: 1
   chaseRange: 6
   attackRange: 0.4
-  attackCooldown: 1.5
+  attackCooldown: 2.5
   bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   currentHealth: 0
   isDead: 0

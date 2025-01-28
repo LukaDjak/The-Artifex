@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 284896906681883787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.8208952, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -283,10 +283,10 @@ MonoBehaviour:
   enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
-  damage: 2
+  damage: 1
   chaseRange: 5
   attackRange: 0.4
-  attackCooldown: 1.5
+  attackCooldown: 3
   bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   currentHealth: 0
   isDead: 0

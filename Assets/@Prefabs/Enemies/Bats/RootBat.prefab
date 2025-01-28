@@ -200,14 +200,14 @@ MonoBehaviour:
   enemyAttack: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   flashMaterial: {fileID: 2100000, guid: 3c3285425e54d644e87800fa224daf60, type: 2}
   flashDuration: 0.05
-  damage: 3
+  damage: 1
   chaseRange: 10
   attackRange: 0.67
-  attackCooldown: 1
+  attackCooldown: 2
   bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   currentHealth: 0
   isDead: 0
   speed: 3
-  chaseSpeedMultiplier: 6
+  chaseSpeedMultiplier: 2
   minWanderTime: 2
   maxWanderTime: 5
