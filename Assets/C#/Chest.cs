@@ -64,8 +64,6 @@ public class Chest : MonoBehaviour
                 boost.ApplyBoost(player);
                 if (boost.boostName == "Heal")
                     text.text = $"{boost.boostName}: +{boost.boostAmount}HP";
-                else if (boost.boostName == "Grenade")
-                    text.text = $"{boost.boostName}: +{boost.boostAmount}";
                 else
                     text.text = $"{boost.boostName}: +{boost.boostAmount * 100f}%";
                 IconUI.sprite = boost.boostIcon;

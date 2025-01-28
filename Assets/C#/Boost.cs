@@ -7,7 +7,7 @@ public class Boost
     public Sprite boostIcon;
     public float probability;
 
-    [Tooltip("In %, except grenades and heal (amount)")]
+    [Tooltip("In %, except heal (amount)")]
     public float boostAmount;
 
     public void ApplyBoost(Player player)
@@ -36,12 +36,12 @@ public class Boost
             case "Heal":
                 player.GiveHealth((int)boostAmount);
                 break;
-            case "Grenade":
-                player.chestMultipliers.grenades++;
-                break;
             case "Revive Chance":
                 player.chestMultipliers.reviveChanceMultiplier += boostAmount;
                 break;
+            //case "Grenade":
+            //    player.chestMultipliers.grenades++;
+            //    break;
             default:
                 break; //call here again if needed - PLAYER MUST GET SOMETHING FROM EVERY CHEST
         }

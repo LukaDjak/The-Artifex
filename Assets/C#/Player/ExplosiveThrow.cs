@@ -19,7 +19,7 @@ public class ExplosiveThrow : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1) && player.chestMultipliers.grenades > 0) // Right click to equip grenade
+        if (Input.GetMouseButtonDown(1) /*&& player.chestMultipliers.grenades > 0*/) // Right click to equip grenade
             EquipGrenade();
 
         if (isAimingGrenade)
@@ -46,18 +46,18 @@ public class ExplosiveThrow : MonoBehaviour
 
     private void ThrowGrenade()
     {
-        if (player.chestMultipliers.grenades > 0)
-        {
+        //if (player.chestMultipliers.grenades > 0)
+        //{
             Rigidbody2D rb = currentGrenade.GetComponent<Rigidbody2D>();
             rb.isKinematic = false; // Enable physics
 
             // Throw the grenade in the aimed direction with force
             rb.AddForce(currentGrenade.transform.up * throwForce, ForceMode2D.Impulse);
 
-            player.chestMultipliers.grenades--;
+            //player.chestMultipliers.grenades--;
             isAimingGrenade = false;
 
             Destroy(currentGrenade, 5f); // Destroy the grenade after 5 seconds (or set it to explode)
-        }
+        //}
     }
 }

@@ -145,18 +145,3 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }
-
-/* juicing up enemies
-- hurt flash - done
-- blood particles
-- little knockback - done
-- audio effect - done
-*/
-
-/*
-death animation:
-- wolf
-- eye
-- bat
-- slime
-*/

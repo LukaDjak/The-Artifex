@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 8831889992301902650}
   - component: {fileID: 9169171356606439440}
   - component: {fileID: 5205415992512109266}
-  - component: {fileID: 103499211623343585}
   - component: {fileID: 3249964185786378894}
   - component: {fileID: 5045525204589057020}
   - component: {fileID: 585617253169943001}
@@ -143,22 +142,6 @@ MonoBehaviour:
   attackCooldown: 0.4
   attackSound: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   enemyHurt: {fileID: 8300000, guid: d90284ae508526540a987bf61627f5f9, type: 3}
---- !u!114 &103499211623343585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5851838743060602640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd8923a88596d544b070250ac3ae96b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grenadePrefab: {fileID: 5606492060206690712, guid: bdc89766f368771459cf65be08fe7976, type: 3}
-  throwPoint: {fileID: 3189533575778735135}
-  throwForce: 10
-  aimSpeed: 1
 --- !u!95 &3249964185786378894
 Animator:
   serializedVersion: 5

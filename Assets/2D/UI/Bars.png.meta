@@ -1,0 +1,258 @@
+fileFormatVersion: 2
+guid: 308c11d009576e549a82309381eeaba7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bars_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 102
+        width: 32
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89f844b0bdfb134bbec6a4b43691b37
+      internalID: 1990814703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 70
+        width: 32
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf97204bfc87cc6488241af9d366409d
+      internalID: 708325221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Bars_0: 1990814703
+      Bars_1: 708325221
+      Bars_10: 1132685140
+      Bars_100: -1445761661
+      Bars_101: -1422878866
+      Bars_11: -993193814
+      Bars_12: -881583492
+      Bars_13: -1955608223
+      Bars_14: -950489888
+      Bars_15: 1506258110
+      Bars_16: -512664800
+      Bars_17: 2121367161
+      Bars_18: -131670910
+      Bars_19: -1734774330
+      Bars_2: -570180761
+      Bars_20: 767979601
+      Bars_21: 502165419
+      Bars_22: 1325685517
+      Bars_23: -2021735898
+      Bars_24: -681674125
+      Bars_25: -1596063702
+      Bars_26: -389271112
+      Bars_27: 1427154534
+      Bars_28: -1709202607
+      Bars_29: -911647140
+      Bars_3: -197780487
+      Bars_30: 1336262482
+      Bars_31: 755453343
+      Bars_32: -1768227310
+      Bars_33: -1042485121
+      Bars_34: -1151885685
+      Bars_35: 1875138213
+      Bars_36: 889288112
+      Bars_37: -1277956351
+      Bars_38: -1805675228
+      Bars_39: -1231485632
+      Bars_4: 502037085
+      Bars_40: 1939783268
+      Bars_41: 381349888
+      Bars_42: -1017076548
+      Bars_43: -1091889229
+      Bars_44: -53328782
+      Bars_45: 559783799
+      Bars_46: -1095691122
+      Bars_47: -1408573745
+      Bars_48: -178069828
+      Bars_49: -1898356054
+      Bars_5: -2059040453
+      Bars_50: -1610773389
+      Bars_51: 2025994021
+      Bars_52: 668663281
+      Bars_53: 274948505
+      Bars_54: 1709245246
+      Bars_55: -2053778360
+      Bars_56: -1724789542
+      Bars_57: 898456025
+      Bars_58: 857315773
+      Bars_59: 1233523450
+      Bars_6: 1325501418
+      Bars_60: -1959508753
+      Bars_61: 1802126356
+      Bars_62: -1250667458
+      Bars_63: -1085354109
+      Bars_64: -1386939613
+      Bars_65: 1887447096
+      Bars_66: -1299568588
+      Bars_67: -105791042
+      Bars_68: 1260735921
+      Bars_69: 996987602
+      Bars_7: 1332527400
+      Bars_70: -1886939949
+      Bars_71: -1341758269
+      Bars_72: 1015164408
+      Bars_73: 1459898639
+      Bars_74: 364787590
+      Bars_75: -2115321038
+      Bars_76: -1965951100
+      Bars_77: 744962008
+      Bars_78: 447320170
+      Bars_79: -496204306
+      Bars_8: 1441083165
+      Bars_80: -1332246996
+      Bars_81: 202258663
+      Bars_82: 1526099472
+      Bars_83: -1507273735
+      Bars_84: -436987314
+      Bars_85: -1884019082
+      Bars_86: 1800812158
+      Bars_87: 1151628704
+      Bars_88: 1667869650
+      Bars_89: -1336040776
+      Bars_9: -1121924604
+      Bars_90: -16852451
+      Bars_91: -490940825
+      Bars_92: -709213274
+      Bars_93: 96344802
+      Bars_94: 29107660
+      Bars_95: 2696656
+      Bars_96: 447684255
+      Bars_97: -1624100659
+      Bars_98: -466508410
+      Bars_99: -1819998017
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

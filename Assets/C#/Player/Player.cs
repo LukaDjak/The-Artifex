@@ -129,6 +129,6 @@ public class Multipliers
     public float damageMultiplier = 1f;
     public float maxStaminaMultiplier = 1f;
     public float healAmount = 50f;
-    public int grenades = 0; //useless for now
+    //public int grenades = 0; //useless for now
     public float reviveChanceMultiplier = 0f;
 }
