@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private AudioMixer audioMixer;
     private bool isPaused = false;
     private bool isAudioMuted = false;
     private void Update()
@@ -16,6 +17,7 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = pause;
         pauseMenuUI.SetActive(pause);
+        Camera.main.GetComponent<AudioListener>().enabled = !pause;
         LevelManager.instance.isUIActive = pause;
         Time.timeScale = pause ? 0.0f : 1.0f;
     }
@@ -31,6 +33,9 @@ public class PauseMenu : MonoBehaviour
     public void ToggleAudio()
     {
         isAudioMuted = !isAudioMuted;
-        Debug.Log($"Audio: {(isAudioMuted ? "On" : "Off")}");
+        GameManager.settings.muteAudio = isAudioMuted ? 1 : 0;
+        float muteVolume = isAudioMuted ? -80f : GameManager.settings.audioVolume; // -80 dB is effectively muted
+        audioMixer.SetFloat("MasterVolume", muteVolume); // Adjust master volume
+        SaveAndLoad.SaveSettings(GameManager.settings);
     }
 }

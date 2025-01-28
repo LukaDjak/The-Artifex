@@ -23,6 +23,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float attackRange = 1.5f;
     [SerializeField] protected float attackCooldown = 1.5f;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject bloodParticles;
+
     [HideInInspector] public int currentHealth;
     [HideInInspector] public bool isDead = false;
 
@@ -64,6 +67,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        Instantiate(bloodParticles, transform.position, Quaternion.identity);
         if(currentHealth > 0) 
             Flash();
         else
@@ -138,7 +142,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Visualize attack range in editor
+        //visualize attack range in editor
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;

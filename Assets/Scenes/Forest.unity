@@ -1244,7 +1244,7 @@ Transform:
   m_GameObject: {fileID: 139940866}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.317024, y: -13.332579, z: 0.1413809}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3182,7 +3182,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -0.00006917318, y: -27.200035}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 55.915, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278776194
 MonoBehaviour:
@@ -7539,7 +7539,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0000002, y: 0, z: -10}
+  m_LocalPosition: {x: -2.0000002, y: -0.6308019, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10337,7 +10337,7 @@ MonoBehaviour:
   priority: 1
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4a6b6da06b76bbf4787005c4608c8a91, type: 2}
+  sharedProfile: {fileID: 11400000, guid: a14ce36d63b5be34faeaa475c1ae4741, type: 2}
 --- !u!4 &742658287
 Transform:
   m_ObjectHideFlags: 0
@@ -13684,6 +13684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1142076044}
+  audioMixer: {fileID: 24100000, guid: 38b2474799252f84180a8af8a59f0169, type: 2}
 --- !u!114 &936138957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13722,6 +13723,7 @@ MonoBehaviour:
   - {fileID: 1470295352}
   - {fileID: 1470295351}
   - {fileID: 1470295354}
+  - {fileID: 1470295355}
 --- !u!1 &964439265
 GameObject:
   m_ObjectHideFlags: 0
@@ -13845,7 +13847,7 @@ MonoBehaviour:
       - m_Target: {fileID: 936138956}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ToggleAudio
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18520,7 +18522,7 @@ Transform:
   m_GameObject: {fileID: 1323020457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.4877, y: -12.524736, z: 0.1413809}
+  m_LocalPosition: {x: 56.4877, y: -12.524736, z: 0}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19912,7 +19914,7 @@ Transform:
   m_GameObject: {fileID: 1408339286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0000002, y: 0, z: -10}
+  m_LocalPosition: {x: -2.0000002, y: -0.8499999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20994,92 +20996,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1177128260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1470295350
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1470295353}
-  - component: {fileID: 1470295352}
-  - component: {fileID: 1470295351}
-  - component: {fileID: 1470295354}
-  m_Layer: 0
-  m_Name: AbilityScripts
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1470295351
+--- !u!114 &1470295351 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8472866666558182285, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+  m_PrefabInstance: {fileID: 1981641764565111476}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470295350}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 811a02516fb8401478bed128ccefa11f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Infinite Stamina
-  auraCost: 65
-  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
-  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
-  duration: 5
---- !u!114 &1470295352
+--- !u!114 &1470295352 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1464829151357708476, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+  m_PrefabInstance: {fileID: 1981641764565111476}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470295350}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e85bf294ed0d05a4db319c3d0eccd77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Jump Boost
-  auraCost: 50
-  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
-  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
-  duration: 10
-  jumpBoostMultiplier: 1.5
---- !u!4 &1470295353
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470295350}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 581.77106, y: 694.27734, z: -7.4972005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1470295354
+--- !u!114 &1470295354 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2693338633067524335, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+  m_PrefabInstance: {fileID: 1981641764565111476}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470295350}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 973953dc6006cb74d8845dfdd36ce0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Dash
-  auraCost: 5
-  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
-  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
-  duration: 10
+--- !u!114 &1470295355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6576588965404340879, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+  m_PrefabInstance: {fileID: 1981641764565111476}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35fc1bb58956014589e3c75e5063a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1502122580
 GameObject:
   m_ObjectHideFlags: 0
@@ -57618,6 +57578,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1177128260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1981641764565111476
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391680190360292749, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676875210984029039, guid: 39897193d14120d4c892d63e419fada7, type: 3}
+      propertyPath: m_Name
+      value: AbilityScripts
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39897193d14120d4c892d63e419fada7, type: 3}
 --- !u!1001 &8425663855596019403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57632,7 +57649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129790774280194737, guid: 40efce771feb7594487c72460263f01e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.85
       objectReference: {fileID: 0}
     - target: {fileID: 129790774280194737, guid: 40efce771feb7594487c72460263f01e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57677,7 +57694,7 @@ PrefabInstance:
     - target: {fileID: 8831889992301902650, guid: 40efce771feb7594487c72460263f01e, type: 3}
       propertyPath: auraText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1386849505}
     - target: {fileID: 8831889992301902650, guid: 40efce771feb7594487c72460263f01e, type: 3}
       propertyPath: healthBar
       value: 
@@ -57690,6 +57707,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 455074168}
+    - target: {fileID: 8831889992301902650, guid: 40efce771feb7594487c72460263f01e, type: 3}
+      propertyPath: bloodParticles
+      value: 
+      objectReference: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57707,7 +57728,7 @@ SceneRoots:
   - {fileID: 936138955}
   - {fileID: 1142076049}
   - {fileID: 1529882224}
-  - {fileID: 1470295353}
+  - {fileID: 1981641764565111476}
   - {fileID: 1822693872}
   - {fileID: 828639650}
   - {fileID: 1974357052}

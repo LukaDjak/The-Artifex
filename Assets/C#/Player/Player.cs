@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxHealth, maxAura;
     [SerializeField] private float maxStamina;
     [SerializeField] private AudioClip playerHurt;
+    [SerializeField] private GameObject bloodParticles;
 
     [HideInInspector] public Multipliers chestMultipliers = new();
     [HideInInspector] public int health, aura;
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
         else
             animator.SetTrigger("Hurt");
         AudioManager.instance.PlaySFX(playerHurt);
+        Instantiate(bloodParticles, transform.position, Quaternion.identity);
         UpdateBars();
     }
 
@@ -119,6 +121,13 @@ public class Player : MonoBehaviour
 
     public void IncreaseMaxHealth() => maxHealth = (int)(maxHealth * chestMultipliers.maxHealthMultiplier);
     public void IncreaseMaxStamina() => maxStamina = (int)(maxStamina * chestMultipliers.maxStaminaMultiplier);
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        UpdateBars();
+    }
 }
 
 public class Multipliers

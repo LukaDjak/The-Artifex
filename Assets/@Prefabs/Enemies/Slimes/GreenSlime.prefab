@@ -287,6 +287,7 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 0.4
   attackCooldown: 1.5
+  bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   currentHealth: 0
   isDead: 0
   jumpForce: 7

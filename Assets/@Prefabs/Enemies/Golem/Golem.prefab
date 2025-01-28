@@ -204,6 +204,7 @@ MonoBehaviour:
   chaseRange: 10
   attackRange: 0.7
   attackCooldown: 1.5
+  bloodParticles: {fileID: 4795090824735114814, guid: d1c8bcdcbcc1854478e37b8a06a19fe3, type: 3}
   currentHealth: 0
   isDead: 0
   idleDuration: 2
@@ -217,6 +218,6 @@ MonoBehaviour:
   obstacleDetectionDistance: 1
   attackClip: {fileID: 8300000, guid: bcbea89ea0609314c8d4e887e44a05f3, type: 3}
   deathClips:
-  - {fileID: 8300000, guid: 8bb72405cbdb45c438b62e71c10d2395, type: 3}
+  - {fileID: 8300000, guid: 7277a2085cfb14d409a3a5902723671f, type: 3}
   noArmorAttackFX: {fileID: 762440175502185534, guid: f392f3a251a60f141aa8a7d662c721fa, type: 3}
   armorAttackFX: {fileID: 8225962684835710357, guid: 5a4c44363b6367a4da95c7541120695e, type: 3}

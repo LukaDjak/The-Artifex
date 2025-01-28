@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5676875210984029039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5391680190360292749}
+  - component: {fileID: 1464829151357708476}
+  - component: {fileID: 8472866666558182285}
+  - component: {fileID: 2693338633067524335}
+  - component: {fileID: 6576588965404340879}
+  m_Layer: 0
+  m_Name: AbilityScripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5391680190360292749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676875210984029039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1464829151357708476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676875210984029039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85bf294ed0d05a4db319c3d0eccd77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Jump Boost
+  auraCost: 50
+  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
+  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
+  duration: 10
+  jumpBoostMultiplier: 1.5
+--- !u!114 &8472866666558182285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676875210984029039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811a02516fb8401478bed128ccefa11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Infinite Stamina
+  auraCost: 65
+  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
+  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
+  duration: 5
+--- !u!114 &2693338633067524335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676875210984029039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973953dc6006cb74d8845dfdd36ce0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Dash
+  auraCost: 50
+  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
+  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
+  duration: 10
+--- !u!114 &6576588965404340879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676875210984029039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35fc1bb58956014589e3c75e5063a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Heal
+  auraCost: 50
+  activationSound: {fileID: 8300000, guid: a525de98f3765b947b3b392c81c637bf, type: 3}
+  deactivationSound: {fileID: 8300000, guid: fb924c2ea6b0f724590d1a79ecbaf211, type: 3}
+  healPerSecond: 5
+  duration: 10

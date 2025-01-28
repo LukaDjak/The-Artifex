@@ -11046,7 +11046,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 4a6b6da06b76bbf4787005c4608c8a91, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 0d779300ad0c22c4780932ed22c5a458, type: 2}
 --- !u!4 &742658287
 Transform:
   m_ObjectHideFlags: 0
@@ -13792,6 +13792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1142076044}
+  audioMixer: {fileID: 0}
 --- !u!114 &936138957
 MonoBehaviour:
   m_ObjectHideFlags: 0
